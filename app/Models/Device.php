@@ -10,10 +10,10 @@ class Device extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_id',
-        'inventory_number',
+        'device_name_id',
+        'device_number',
         'brand_id',
-        'model_id',
+        'type_id',
         'serial_number',
         'location',
         'procurement_year',
@@ -26,7 +26,7 @@ class Device extends Model
         'result',
         'status',
         'notes',
-        'user_id',
+        'admin_id',
     ];
 
     /**
@@ -34,7 +34,7 @@ class Device extends Model
      */
     public function deviceName()
     {
-        return $this->belongsTo(DeviceName::class, 'name_id');
+        return $this->belongsTo(DeviceName::class, 'device_name_id');
     }
 
     /**
@@ -46,19 +46,27 @@ class Device extends Model
     }
 
     /**
-     * A device belongs to a model
+     * A device belongs to a type (model)
      */
-    public function model()
+    public function type()
     {
-        return $this->belongsTo(DeviceModel::class, 'model_id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     /**
-     * A device belongs to a user (PIC)
+     * A device belongs to a user (PIC - Person In Charge)
      */
     public function pic()
     {
-        return $this->belongsTo(User::class, 'pic_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * A device belongs to an admin user (who created it)
+     */
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
     /**
@@ -67,14 +75,6 @@ class Device extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    /**
-     * A device belongs to a user (who created it)
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**

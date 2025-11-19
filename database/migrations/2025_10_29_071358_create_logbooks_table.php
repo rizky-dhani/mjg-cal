@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Inventory;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,16 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('log_number')->unique();
             $table->date('date');
-            $table->unsignedBigInteger('inventory_id');
+            $table->foreignIdFor(Inventory::class);
             $table->text('accessories')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('location');
-            $table->string('pic');
-            $table->string('status')->default('active');
+            $table->foreignIdFor(User::class, 'pic_id');
+            $table->enum('status', ['Available', 'Borrowed']);
             $table->timestamps();
-            
-            $table->foreign('inventory_id')->references('id')->on('inventories')->onDelete('cascade');
         });
     }
 

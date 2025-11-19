@@ -1,0 +1,25 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $superadmin = User::create([
+            'name' => 'Superadmin',
+            'initial' => 'SA',
+            'email' => 'superadmin@medquest.co.id',
+            'password' => Hash::make('Superadmin2025!'),
+        ]);
+
+        $superadmin->assignRole('Super Admin');
+    }
+}

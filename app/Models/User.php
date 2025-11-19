@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'username',
+        'initial',
         'password',
         'role',
         'customer_id',
@@ -49,12 +49,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
+
     /**
      * A user belongs to a customer (for Hospital User role)
      */
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * A user has many devices as PIC
+     */
+    public function devicePic()
+    {
+        return $this->hasMany(Device::class, 'pic_id');
+    }
+
+    /**
+     * A user has many logbooks as PIC
+     */
+    public function logbookPic()
+    {
+        return $this->hasMany(Logbook::class, 'pic_id');
     }
 }

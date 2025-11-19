@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DeviceModel extends Model
+class Type extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class DeviceModel extends Model
     ];
 
     /**
-     * A model belongs to a brand
+     * A type belongs to a brand
      */
     public function brand()
     {
@@ -24,7 +24,7 @@ class DeviceModel extends Model
     }
 
     /**
-     * A model has many devices
+     * A type has many devices
      */
     public function devices()
     {
