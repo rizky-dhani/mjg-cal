@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Brand extends Model
 {
@@ -15,11 +16,21 @@ class Brand extends Model
     ];
 
     /**
+     * Generate a slug automatically when creating or updating a brand
+     */
+    protected static function booted(): void
+    {
+        static::saving(function ($brand) {
+            $brand->slug = Str::slug($brand->name);
+        });
+    }
+
+    /**
      * A brand has many models
      */
-    public function models()
+    public function types()
     {
-        return $this->hasMany(DeviceModel::class, 'brand_id');
+        return $this->hasMany(Type::class, 'brand_id');
     }
 
     /**
