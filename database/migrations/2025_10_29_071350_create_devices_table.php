@@ -18,23 +18,24 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(DeviceName::class);
-            $table->string('device_number')->unique();
-            $table->foreignIdFor(Brand::class)->nullable();
-            $table->foreignIdFor(Type::class)->nullable();
+            $table->uuid('deviceId')->after('id')->unique();
+            $table->foreignIdFor(DeviceName::class)->nullable()->constrained('device_names');
+            $table->string('device_number')->nullable()->unique();
+            $table->foreignIdFor(Brand::class)->nullable()->constrained('brands');
+            $table->foreignIdFor(Type::class)->nullable()->constrained('types');
             $table->string('serial_number')->nullable();
             $table->string('location')->nullable();
             $table->year('procurement_year')->nullable();
-            $table->foreignIdFor(User::class, 'pic_id')->nullable(); // Points to User
-            $table->foreignIdFor(Customer::class)->nullable(); // Points to Customer
-            $table->date('calibrated_date')->nullable();
+            $table->foreignIdFor(User::class, 'pic_id')->nullable()->constrained('users'); // Points to User
+            $table->foreignIdFor(Customer::class)->nullable()->constrained('customers'); // Points to Customer
+            $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->string('cert_number')->nullable();
             $table->string('barcode')->nullable();
             $table->string('result')->nullable(); // Calibration result
             $table->enum('status', ['Available', 'Unavailable'])->default('Available'); // Device status
             $table->text('notes')->nullable();
-            $table->foreignIdFor(User::class, 'admin_id')->nullable(); // Points to User who created the device
+            $table->foreignIdFor(User::class, 'admin_id')->nullable()->constrained('users'); // Points to User who created the device
             $table->timestamps();
         });
     }
