@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Customer extends Model
 {
@@ -15,6 +16,16 @@ class Customer extends Model
         'phone_number',
         'address',
     ];
+
+    /**
+     * Generate a slug automatically when creating or updating a customer
+     */
+    protected static function booted(): void
+    {
+        static::saving(function ($customer) {
+            $customer->slug = Str::slug($customer->name);
+        });
+    }
 
     /**
      * A customer has many users (Hospital Users)

@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Customer;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CustomerPolicy
 {
@@ -13,7 +12,7 @@ class CustomerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -21,7 +20,7 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -29,7 +28,7 @@ class CustomerPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -37,7 +36,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -45,7 +44,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -53,7 +52,7 @@ class CustomerPolicy
      */
     public function restore(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -61,6 +60,6 @@ class CustomerPolicy
      */
     public function forceDelete(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 }
