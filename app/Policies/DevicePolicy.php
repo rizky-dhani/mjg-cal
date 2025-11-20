@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Device;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class DevicePolicy
 {
@@ -13,7 +12,7 @@ class DevicePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -21,7 +20,7 @@ class DevicePolicy
      */
     public function view(User $user, Device $device): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -29,7 +28,7 @@ class DevicePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -37,7 +36,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -45,7 +44,7 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -53,7 +52,7 @@ class DevicePolicy
      */
     public function restore(User $user, Device $device): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -61,6 +60,6 @@ class DevicePolicy
      */
     public function forceDelete(User $user, Device $device): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 }

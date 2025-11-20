@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Device extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'deviceId',
         'device_name_id',
         'device_number',
         'brand_id',
@@ -28,6 +30,27 @@ class Device extends Model
         'notes',
         'admin_id',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'deviceId';
+    }
+
+    protected $casts = [
+        'deviceId' => 'string',
+    ];
+
+    /**
+     * Generate a new UUID for the device ID when creating a new record
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($device) {
+            if (! $device->deviceId) {
+                $device->deviceId = (string) Str::orderedUuid();
+            }
+        });
+    }
 
     /**
      * A device belongs to a device name
