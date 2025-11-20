@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Inventory;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class InventoryPolicy
 {
@@ -13,7 +12,7 @@ class InventoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -21,7 +20,7 @@ class InventoryPolicy
      */
     public function view(User $user, Inventory $inventory): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -29,7 +28,7 @@ class InventoryPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -37,7 +36,7 @@ class InventoryPolicy
      */
     public function update(User $user, Inventory $inventory): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -45,7 +44,7 @@ class InventoryPolicy
      */
     public function delete(User $user, Inventory $inventory): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -53,7 +52,7 @@ class InventoryPolicy
      */
     public function restore(User $user, Inventory $inventory): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 
     /**
@@ -61,6 +60,6 @@ class InventoryPolicy
      */
     public function forceDelete(User $user, Inventory $inventory): bool
     {
-        return false;
+        return $user->hasRole('Super Admin');
     }
 }
