@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Inventories;
 
-use App\Filament\Dashboard\Resources\Inventories\Pages\CreateInventory;
-use App\Filament\Dashboard\Resources\Inventories\Pages\EditInventory;
 use App\Filament\Dashboard\Resources\Inventories\Pages\ListInventories;
 use App\Filament\Dashboard\Resources\Inventories\Schemas\InventoryForm;
 use App\Filament\Dashboard\Resources\Inventories\Tables\InventoriesTable;
@@ -41,8 +39,6 @@ class InventoryResource extends Resource
     {
         return [
             'index' => ListInventories::route('/'),
-            'create' => CreateInventory::route('/create'),
-            'edit' => EditInventory::route('/{record}/edit'),
         ];
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Customers;
 
-use App\Filament\Dashboard\Resources\Customers\Pages\CreateCustomer;
-use App\Filament\Dashboard\Resources\Customers\Pages\EditCustomer;
 use App\Filament\Dashboard\Resources\Customers\Pages\ListCustomers;
 use App\Filament\Dashboard\Resources\Customers\Schemas\CustomerForm;
 use App\Filament\Dashboard\Resources\Customers\Tables\CustomersTable;
@@ -41,8 +39,6 @@ class CustomerResource extends Resource
     {
         return [
             'index' => ListCustomers::route('/'),
-            'create' => CreateCustomer::route('/create'),
-            'edit' => EditCustomer::route('/{record}/edit'),
         ];
     }
 }

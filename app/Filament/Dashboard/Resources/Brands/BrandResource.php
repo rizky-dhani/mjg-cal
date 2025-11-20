@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Brands;
 
-use App\Filament\Dashboard\Resources\Brands\Pages\CreateBrand;
-use App\Filament\Dashboard\Resources\Brands\Pages\EditBrand;
 use App\Filament\Dashboard\Resources\Brands\Pages\ListBrands;
 use App\Filament\Dashboard\Resources\Brands\Schemas\BrandForm;
 use App\Filament\Dashboard\Resources\Brands\Tables\BrandsTable;
@@ -41,8 +39,6 @@ class BrandResource extends Resource
     {
         return [
             'index' => ListBrands::route('/'),
-            'create' => CreateBrand::route('/create'),
-            'edit' => EditBrand::route('/{record}/edit'),
         ];
     }
 }

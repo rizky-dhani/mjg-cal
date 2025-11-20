@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Logbooks;
 
-use App\Filament\Dashboard\Resources\Logbooks\Pages\CreateLogbook;
-use App\Filament\Dashboard\Resources\Logbooks\Pages\EditLogbook;
 use App\Filament\Dashboard\Resources\Logbooks\Pages\ListLogbooks;
 use App\Filament\Dashboard\Resources\Logbooks\Schemas\LogbookForm;
 use App\Filament\Dashboard\Resources\Logbooks\Tables\LogbooksTable;
@@ -41,8 +39,6 @@ class LogbookResource extends Resource
     {
         return [
             'index' => ListLogbooks::route('/'),
-            'create' => CreateLogbook::route('/create'),
-            'edit' => EditLogbook::route('/{record}/edit'),
         ];
     }
 }

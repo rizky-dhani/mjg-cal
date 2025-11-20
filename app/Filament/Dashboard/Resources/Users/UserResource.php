@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Users;
 
-use App\Filament\Dashboard\Resources\Users\Pages\CreateUser;
-use App\Filament\Dashboard\Resources\Users\Pages\EditUser;
 use App\Filament\Dashboard\Resources\Users\Pages\ListUsers;
 use App\Filament\Dashboard\Resources\Users\Schemas\UserForm;
 use App\Filament\Dashboard\Resources\Users\Tables\UsersTable;
@@ -41,8 +39,6 @@ class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'create' => CreateUser::route('/create'),
-            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

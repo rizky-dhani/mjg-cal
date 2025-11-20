@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\Devices;
 
-use App\Filament\Dashboard\Resources\Devices\Pages\CreateDevice;
-use App\Filament\Dashboard\Resources\Devices\Pages\EditDevice;
 use App\Filament\Dashboard\Resources\Devices\Pages\ListDevices;
 use App\Filament\Dashboard\Resources\Devices\Schemas\DeviceForm;
 use App\Filament\Dashboard\Resources\Devices\Tables\DevicesTable;
@@ -41,8 +39,6 @@ class DeviceResource extends Resource
     {
         return [
             'index' => ListDevices::route('/'),
-            'create' => CreateDevice::route('/create'),
-            'edit' => EditDevice::route('/{record}/edit'),
         ];
     }
 }

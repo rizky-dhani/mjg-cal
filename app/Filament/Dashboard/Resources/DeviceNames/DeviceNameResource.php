@@ -2,8 +2,6 @@
 
 namespace App\Filament\Dashboard\Resources\DeviceNames;
 
-use App\Filament\Dashboard\Resources\DeviceNames\Pages\CreateDeviceName;
-use App\Filament\Dashboard\Resources\DeviceNames\Pages\EditDeviceName;
 use App\Filament\Dashboard\Resources\DeviceNames\Pages\ListDeviceNames;
 use App\Filament\Dashboard\Resources\DeviceNames\Schemas\DeviceNameForm;
 use App\Filament\Dashboard\Resources\DeviceNames\Tables\DeviceNamesTable;
@@ -41,8 +39,6 @@ class DeviceNameResource extends Resource
     {
         return [
             'index' => ListDeviceNames::route('/'),
-            'create' => CreateDeviceName::route('/create'),
-            'edit' => EditDeviceName::route('/{record}/edit'),
         ];
     }
 }
