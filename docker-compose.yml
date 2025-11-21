@@ -1,0 +1,66 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mjg-cal-app
+    ports:
+      - "2006:8080"
+      - "2007:8443"
+    restart: "always"
+    volumes:
+      - ./:/var/www/html:cached
+    user: root
+    environment:
+      SSL_MODE: mixed
+      DB_CONNECTION: mariadb
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - mjg-cal-net
+
+  mariadb:
+    image: mariadb:11
+    container_name: mjg-cal-mariadb
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - mjg-cal-net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: mjg-cal-phpmyadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    depends_on:
+      - mariadb
+    networks:
+      - mjg-cal-net
+
+volumes:
+  mariadb_data:
+
+networks:
+  mjg-cal-net:
+    driver: bridge
