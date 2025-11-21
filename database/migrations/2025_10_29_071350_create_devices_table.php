@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->uuid('deviceId')->after('id')->unique();
+            $table->uuid('deviceId')->unique();
             $table->foreignIdFor(DeviceName::class)->nullable()->constrained('device_names');
             $table->string('device_number')->nullable()->unique();
             $table->foreignIdFor(Brand::class)->nullable()->constrained('brands');
