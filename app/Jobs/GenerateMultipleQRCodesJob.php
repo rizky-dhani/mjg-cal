@@ -32,7 +32,7 @@ class GenerateMultipleQRCodesJob implements ShouldQueue
     {
         $devicesToInsert = [];
 
-        foreach ($this->devices as $device) {
+        foreach ($this->devices as $index => $device) {
             try {
                 // Generate QR code and path
                 $qr = new DNS2D;
@@ -43,9 +43,23 @@ class GenerateMultipleQRCodesJob implements ShouldQueue
 
                 Storage::disk('public')->put($path, base64_decode($qrCodePng));
 
+                // Generate unique device number with template MJG-CAL- followed by 6 digits zero-padded
+                $sequenceNumber = $index + 1;
+                $deviceNumber = 'MJG-CAL-' . str_pad($sequenceNumber, 6, '0', STR_PAD_LEFT);
+
+                // Ensure uniqueness by checking against existing device numbers in the database
+                $originalDeviceNumber = $deviceNumber;
+                $counter = 0;
+
+                while (DB::table('devices')->where('device_number', $deviceNumber)->exists()) {
+                    $counter++;
+                    $deviceNumber = $originalDeviceNumber . '-' . $counter;
+                }
+
                 // Prepare device data for insertion
                 $devicesToInsert[] = [
                     'deviceId' => $device['deviceId'],
+                    'device_number' => $deviceNumber,
                     'barcode' => $path,
                     'result' => 'Laik Pakai', // Default result based on the example
                     'created_at' => now(),

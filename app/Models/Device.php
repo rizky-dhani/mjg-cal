@@ -53,6 +53,14 @@ class Device extends Model
     }
 
     /**
+     * A device belongs to a location
+     */
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    /**
      * A device belongs to a device name
      */
     public function deviceName()

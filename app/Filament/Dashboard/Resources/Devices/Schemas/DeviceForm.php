@@ -2,11 +2,13 @@
 
 namespace App\Filament\Dashboard\Resources\Devices\Schemas;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class DeviceForm
 {
@@ -14,47 +16,39 @@ class DeviceForm
     {
         return $schema
             ->components([
-                TextInput::make('device_name_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('device_number')
+                Select::make('device_name_id')
+                    ->relationship('deviceName', 'name')
                     ->required(),
-                TextInput::make('brand_id')
-                    ->numeric()
-                    ->default(null),
-                TextInput::make('type_id')
-                    ->numeric()
-                    ->default(null),
                 TextInput::make('serial_number')
+                    ->default(null),
+                Select::make('brand_id')
+                    ->relationship('brand', 'name')
+                    ->default(null),
+                Select::make('type_id')
+                    ->relationship('type', 'name')
                     ->default(null),
                 TextInput::make('location')
                     ->default(null),
                 TextInput::make('procurement_year')
                     ->default(null),
-                TextInput::make('pic_id')
-                    ->numeric()
-                    ->default(null),
-                TextInput::make('customer_id')
-                    ->numeric()
+                Select::make('customer_id')
+                    ->relationship('customer', 'name')
                     ->default(null),
                 DatePicker::make('calibrated_date'),
-                DatePicker::make('next_calibration_date'),
-                TextInput::make('cert_number')
-                    ->default(null),
-                TextInput::make('barcode')
-                    ->default(null),
-                TextInput::make('result')
-                    ->default(null),
+                Select::make('result')
+                ->options([
+                    'Laik Pakai' => 'Laik Pakai',
+                    'Tidak Laik Pakai' => 'Tidak Laik Pakai',
+                ]),
                 Select::make('status')
-                    ->options(['Available' => 'Available', 'Unavailable' => 'Unavailable'])
-                    ->default('Available')
+                ->options(['Tersedia' => 'Tersedia', 'Tidak Tersedia' => 'Tidak Tersedia'])
+                    ->default('Tersedia')
                     ->required(),
-                Textarea::make('notes')
-                    ->default(null)
+                FileUpload::make('cert_number')
+                    ->disk('public')
+                    ->directory('certificates')
+                    ->visibility('public')
                     ->columnSpanFull(),
-                TextInput::make('admin_id')
-                    ->numeric()
-                    ->default(null),
             ]);
     }
 }

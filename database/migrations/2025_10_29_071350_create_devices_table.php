@@ -24,18 +24,18 @@ return new class extends Migration
             $table->foreignIdFor(Brand::class)->nullable()->constrained('brands');
             $table->foreignIdFor(Type::class)->nullable()->constrained('types');
             $table->string('serial_number')->nullable();
-            $table->string('location')->nullable();
+            $table->foreignIdFor('location_id')->nullable()->constrained('locations');
             $table->year('procurement_year')->nullable();
-            $table->foreignIdFor(User::class, 'pic_id')->nullable()->constrained('users'); // Points to User
-            $table->foreignIdFor(Customer::class)->nullable()->constrained('customers'); // Points to Customer
+            $table->foreignIdFor(User::class, 'pic_id')->nullable()->constrained('users');
+            $table->foreignIdFor(Customer::class)->nullable()->constrained('customers');
             $table->date('calibration_date')->nullable();
             $table->date('next_calibration_date')->nullable();
             $table->string('cert_number')->nullable();
             $table->string('barcode')->nullable();
-            $table->string('result')->nullable(); // Calibration result
-            $table->enum('status', ['Available', 'Unavailable'])->default('Available'); // Device status
+            $table->enum('result', ['Laik Pakai', 'Tidak Laik Pakai'])->nullable();
+            $table->enum('status', ['Tersedia', 'Tidak Tersedia'])->default('Available');
             $table->text('notes')->nullable();
-            $table->foreignIdFor(User::class, 'admin_id')->nullable()->constrained('users'); // Points to User who created the device
+            $table->foreignIdFor(User::class, 'admin_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

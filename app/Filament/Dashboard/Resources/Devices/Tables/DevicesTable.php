@@ -90,7 +90,22 @@ class DevicesTable
                     ->icon('heroicon-o-eye')
                     ->openUrlInNewTab()
                     ->url(fn ($record) => route('devices.publicDetail', $record->deviceId)),
-                EditAction::make(),
+                EditAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $user = auth()->user();
+
+                        // Fill pic_id if user role is Technician
+                        if ($user && $user->role === 'Technician') {
+                            $data['pic_id'] = $user->id;
+                        }
+
+                        // Fill admin_id if user role is Admin
+                        if ($user && $user->role === 'Admin') {
+                            $data['admin_id'] = $user->id;
+                        }
+
+                        return $data;
+                    }),
                 DeleteAction::make()
                     ->requiresConfirmation()
                     ->successNotificationTitle('Device and QR code deleted successfully')
