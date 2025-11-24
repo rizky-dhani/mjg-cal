@@ -49,6 +49,17 @@ class Device extends Model
             if (! $device->deviceId) {
                 $device->deviceId = (string) Str::orderedUuid();
             }
+            // Make next calibrated date a year from calibration_date
+            if ($device->calibration_date) {
+                $device->next_calibration_date = \Carbon\Carbon::parse($device->calibration_date)->addYear();
+            }
+        });
+
+        static::updating(function ($device) {
+            // Update next calibrated date to be a year from calibration_date if calibration_date is changed
+            if ($device->isDirty('calibration_date')) {
+                $device->next_calibration_date = \Carbon\Carbon::parse($device->calibration_date)->addYear();
+            }
         });
     }
 
