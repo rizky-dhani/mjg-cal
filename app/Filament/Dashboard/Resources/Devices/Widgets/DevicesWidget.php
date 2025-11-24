@@ -54,7 +54,12 @@ class DevicesWidget extends StatsOverviewWidget
                 ->color('success')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
                     'tableFilters' => [
-                        'filled' => '1',
+                        'filled' => [
+                            'isActive' => 'true'
+                        ],
+                        'empty' => [
+                            'isActive' => 'false'
+                        ],
                     ],
                 ])),
 
@@ -64,7 +69,12 @@ class DevicesWidget extends StatsOverviewWidget
                 ->color('danger')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
                     'tableFilters' => [
-                        'empty' => '1',
+                        'filled' => [
+                            'isActive' => 'false'
+                        ],
+                        'empty' => [
+                            'isActive' => 'true'
+                        ],
                     ],
                 ])),
         ];
