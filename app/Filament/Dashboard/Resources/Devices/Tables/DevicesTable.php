@@ -41,10 +41,10 @@ class DevicesTable
                     ->label('Serial Number')
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->serial_number ?? 'N/A'),
-                TextColumn::make('location')
+                TextColumn::make('location.name')
                     ->label('Location')
                     ->searchable()
-                    ->getStateUsing(fn ($record) => $record->location ?? 'N/A'),
+                    ->getStateUsing(fn ($record) => $record->location?->name ?? 'N/A'),
                 TextColumn::make('procurement_year')
                     ->label('Procurement Year')
                     ->getStateUsing(fn ($record) => $record->procurement_year ?: 'N/A'),
@@ -75,6 +75,11 @@ class DevicesTable
                     ->getStateUsing(fn ($record) => $record->result ?? 'N/A'),
                 TextColumn::make('status')
                     ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Tersedia' => 'success',
+                        'Tidak Tersedia' => 'danger',
+                        default => 'gray',
+                    })
                     ->getStateUsing(fn ($record) => $record->status ?? 'N/A'),
                 TextColumn::make('admin_id')
                     ->label('Admin')
@@ -83,7 +88,37 @@ class DevicesTable
                     ->getStateUsing(fn ($record) => $record->admin?->name ?? 'N/A'),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\Filter::make('filled')
+                    ->label('Filled Devices')
+                    ->query(function ($query) {
+                        return $query->whereNotNull('device_name_id')
+                            ->whereNotNull('device_number')
+                            ->whereNotNull('brand_id')
+                            ->whereNotNull('type_id')
+                            ->whereNotNull('serial_number')
+                            ->whereNotNull('location_id')
+                            ->whereNotNull('procurement_year')
+                            ->whereNotNull('pic_id')
+                            ->whereNotNull('customer_id')
+                            ->whereNotNull('calibration_date')
+                            ->whereNotNull('next_calibration_date')
+                            ->whereNotNull('cert_number');
+                    }),
+                \Filament\Tables\Filters\Filter::make('empty')
+                    ->label('Empty Devices')
+                    ->query(function ($query) {
+                        return $query->whereNull('device_name_id')
+                            ->whereNull('brand_id')
+                            ->whereNull('type_id')
+                            ->whereNull('serial_number')
+                            ->whereNull('location_id')
+                            ->whereNull('procurement_year')
+                            ->whereNull('pic_id')
+                            ->whereNull('customer_id')
+                            ->whereNull('calibration_date')
+                            ->whereNull('next_calibration_date')
+                            ->whereNull('cert_number');
+                    }),
             ])
             ->recordActions([
                 Action::make('View')
