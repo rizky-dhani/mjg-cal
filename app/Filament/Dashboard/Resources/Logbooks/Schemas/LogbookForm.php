@@ -14,27 +14,42 @@ class LogbookForm
     {
         return $schema
             ->components([
-                TextInput::make('log_number')
+                Select::make('inventory_id')
+                    ->label('Inventory')
+                    ->relationship('inventory', 'name')
+                    ->getOptionLabelFromRecordUsing(fn($record) => "{$record->inventory_number} - {$record->deviceName->name}")
+                    ->preload()
+                    ->searchable()
+                    ->columnSpanFull()
                     ->required(),
-                DatePicker::make('date')
-                    ->required(),
-                TextInput::make('inventory_id')
-                    ->required()
-                    ->numeric(),
                 Textarea::make('accessories')
-                    ->default(null)
+                    ->autosize()
                     ->columnSpanFull(),
                 DatePicker::make('start_date')
+                    ->label('Start')
+                    ->native(false)
+                    ->displayFormat('d/m/Y')
+                    ->format('Y-m-d')
+                    ->closeOnDateSelection()
                     ->required(),
                 DatePicker::make('end_date')
+                    ->label('End')
+                    ->native(false)
+                    ->displayFormat('d/m/Y')
+                    ->format('Y-m-d')
+                    ->closeOnDateSelection()
                     ->required(),
-                TextInput::make('location')
+                Select::make('location_id')
+                    ->label('Location')
+                    ->relationship('location', 'name')
+                    ->preload()
+                    ->searchable()
                     ->required(),
-                TextInput::make('pic_id')
-                    ->required()
-                    ->numeric(),
-                Select::make('status')
-                    ->options(['Available' => 'Available', 'Borrowed' => 'Borrowed'])
+                Select::make('pic_id')
+                    ->label('PIC')
+                    ->relationship('pic', 'name')
+                    ->preload()
+                    ->searchable()
                     ->required(),
             ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Resources\Logbooks\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -15,36 +16,49 @@ class LogbooksTable
         return $table
             ->columns([
                 TextColumn::make('log_number')
+                    ->label('Log Number')
                     ->searchable(),
                 TextColumn::make('date')
-                    ->date()
+                    ->date('d M Y')
                     ->sortable(),
-                TextColumn::make('inventory_id')
-                    ->numeric()
+                TextColumn::make('inventory.inventory_number')
+                    ->label('Inventory')
+                    ->tooltip(fn($record) => $record->inventory->deviceName->name)
                     ->sortable(),
                 TextColumn::make('start_date')
-                    ->date()
+                    ->label('Start Date')
+                    ->date('d M Y')
                     ->sortable(),
                 TextColumn::make('end_date')
-                    ->date()
+                    ->label('End Date')
+                    ->date('d M Y')
                     ->sortable(),
-                TextColumn::make('location')
+                TextColumn::make('location.name')
                     ->searchable(),
-                TextColumn::make('pic_id')
-                    ->numeric()
+                TextColumn::make('pic.name')
+                    ->label('PIC')
                     ->sortable(),
                 TextColumn::make('status')
-                    ->badge(),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Available' => 'success',
+                        'Borrowed' => 'danger',
+                        default => 'gray',
+                    }),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->successNotificationTitle('Log updated successfully'),
+                DeleteAction::make()
+                    ->successNotificationTitle('Log deleted successfully'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->successNotificationTitle('Selected Log(s) deleted successfully'),
                 ]),
             ]);
     }
