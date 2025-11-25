@@ -19,7 +19,7 @@ class Inventory extends Model
         static::creating(function ($inventory) {
             $inventory->status = 'Available';
             $inventory->next_calibration_date = \Carbon\Carbon::parse($inventory->last_calibration_date)->addYear();
-            // Generate inventory number in MJG-CAL-INV-(6 zero padded) format
+            // Generate inventory number
             if (empty($inventory->inventory_number)) {
                 $latest = static::orderBy('id', 'desc')->first();
                 $number = $latest ? $latest->id + 1 : 1;
