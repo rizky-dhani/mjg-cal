@@ -22,11 +22,10 @@
                 <div class="bg-white rounded-lg shadow p-6 h-full flex flex-col">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6">
                         <div class="w-full sm:w-auto mb-2 sm:mb-0">
-                            <span class="sm:hidden px-3 py-1 mb-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium inline-block text-center mx-auto mb-3">
+                            <span class="sm:hidden px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium inline-block text-center mx-auto mb-3">
                                 {{ $device->status }}
                             </span>
-                            <h1 class="text-2xl font-bold text-gray-800">Device Information</h1>
-                            <p class="text-gray-600 mt-1">{{ $device->deviceName->name ?? 'N/A' }}</p>
+                            <p class="text-2xl text-black font-bold mt-1">{{ $device->deviceName->name ?? 'N/A' }}</p>
                         </div>
                         <span class="hidden sm:inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium self-start">
                             {{ $device->status }}
@@ -57,7 +56,7 @@
 
                     <div>
                         <h3 class="text-sm font-medium text-gray-500">Location</h3>
-                        <p class="mt-1 text-gray-900">{{ $device->location ?? 'N/A' }}</p>
+                        <p class="mt-1 text-gray-900">{{ $device->location->name ?? 'N/A' }}</p>
                     </div>
 
                     <div>
@@ -81,7 +80,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="flex flex-col">
                             <h4 class="text-sm font-medium text-gray-500">Calibrated Date</h4>
-                            <p class="mt-1 text-gray-900">{{ $device->calibrated_date ? \Carbon\Carbon::parse($device->calibrated_date)->format('d M Y') : 'N/A' }}</p>
+                            <p class="mt-1 text-gray-900">{{ $device->calibration_date ? \Carbon\Carbon::parse($device->calibration_date)->format('d M Y') : 'N/A' }}</p>
                         </div>
 
                         <div class="flex flex-col">
