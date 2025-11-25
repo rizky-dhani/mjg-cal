@@ -9,7 +9,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class DevicesWidget extends StatsOverviewWidget
 {
     protected ?string $heading = 'QR Devices';
-    protected static ?string $pollingInterval = null;
+    protected ?string $pollingInterval = null;
     protected function getStats(): array
     {
         // Count total devices
