@@ -10,21 +10,14 @@ class DeviceName extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * Generate a slug automatically when creating or updating a device name
      */
     protected static function booted(): void
     {
-        static::created(function ($deviceName) {
-            $deviceName->slug = Str::slug($deviceName->name);
-        });
-
-        static::updated(function ($deviceName) {
+        static::saving(function ($deviceName) {
             $deviceName->slug = Str::slug($deviceName->name);
         });
     }

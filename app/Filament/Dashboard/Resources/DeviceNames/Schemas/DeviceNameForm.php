@@ -12,6 +12,7 @@ class DeviceNameForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->columnSpanFull()
                     ->required(),
             ]);
     }
