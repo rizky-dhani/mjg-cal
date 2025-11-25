@@ -20,10 +20,6 @@ class UserForm
                     ->required(),
                 TextInput::make('initial')
                     ->required(),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
             ]);
     }
 }

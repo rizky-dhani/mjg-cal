@@ -2,9 +2,10 @@
 
 namespace App\Filament\Dashboard\Resources\Users\Pages;
 
-use App\Filament\Dashboard\Resources\Users\UserResource;
+use Filament\Support\Enums\Width;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Dashboard\Resources\Users\UserResource;
 
 class ListUsers extends ListRecords
 {
@@ -13,7 +14,9 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->modalWidth(Width::SevenExtraLarge)
+                ->successNotificationTitle('User created successfully'),
         ];
     }
 }

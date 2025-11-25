@@ -2,11 +2,15 @@
 
 namespace App\Filament\Dashboard\Resources\Users\Tables;
 
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTable
 {
@@ -21,27 +25,30 @@ class UsersTable
                     ->searchable(),
                 TextColumn::make('initial')
                     ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                Action::make('reset_password')
+                    ->icon(Heroicon::ArrowPathRoundedSquare)
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->action(function($record){
+                        $record->update([
+                            'password' => Hash::make('Calibration2025!')
+                        ]);
+                    })
+                    ->successNotificationTitle('User Password reseted successfully'),
+                EditAction::make()
+                    ->successNotificationTitle('User updated successfully'),
+                DeleteAction::make()
+                    ->successNotificationTitle('User deleted successfully'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->successNotificationTitle('Selected User(s) deleted successfully'),
                 ]),
             ]);
     }
