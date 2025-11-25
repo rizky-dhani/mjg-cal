@@ -9,11 +9,7 @@ class Type extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'brand_id',
-        'name',
-        'slug',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * A type belongs to a brand

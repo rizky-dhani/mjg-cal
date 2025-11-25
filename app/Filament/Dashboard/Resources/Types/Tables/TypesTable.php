@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Resources\Types\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -27,7 +28,7 @@ class TypesTable
             ->recordActions([
                 EditAction::make()
                     ->successNotificationTitle('Type updated successfully'),
-                EditAction::make()
+                DeleteAction::make()
                     ->successNotificationTitle('Type deleted successfully'),
             ])
             ->toolbarActions([

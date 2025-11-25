@@ -15,6 +15,12 @@ class TypeForm
                 Select::make('brand_id')
                     ->label('Brand')
                     ->relationship('brand', 'name')
+                    ->createOptionModalHeading('Add New Brand')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->columnSpanFull()
+                            ->required(),
+                    ])
                     ->preload()
                     ->required(),
                 TextInput::make('name')
