@@ -20,12 +20,15 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->string('inventory_number')->unique();
+            $table->string('serial_number', 50)->nullable();
+            $table->year('procurement_year');
             $table->foreignIdFor(DeviceName::class)->constrained('device_names');
             $table->foreignIdFor(Brand::class)->constrained('brands');
             $table->foreignIdFor(Type::class)->constrained('types');
             $table->foreignIdFor(Location::class)->constrained('locations');
             $table->date('last_calibration_date');
             $table->date('next_calibration_date')->nullable();
+            $table->enum('status', ['Available', 'Unavailable'])->default('Available');
             $table->timestamps();
         });
     }
