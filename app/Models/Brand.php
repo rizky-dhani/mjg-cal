@@ -10,10 +10,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * Generate a slug automatically when creating or updating a brand
