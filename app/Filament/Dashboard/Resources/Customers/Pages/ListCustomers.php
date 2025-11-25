@@ -2,9 +2,10 @@
 
 namespace App\Filament\Dashboard\Resources\Customers\Pages;
 
-use App\Filament\Dashboard\Resources\Customers\CustomerResource;
+use Filament\Support\Enums\Width;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Dashboard\Resources\Customers\CustomerResource;
 
 class ListCustomers extends ListRecords
 {
@@ -13,7 +14,9 @@ class ListCustomers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->modalWidth(Width::SevenExtraLarge)
+                ->successNotificationTitle('Customer created successfully'),
         ];
     }
 }

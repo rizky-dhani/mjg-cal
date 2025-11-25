@@ -10,12 +10,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'phone_number',
-        'address',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * Generate a slug automatically when creating or updating a customer

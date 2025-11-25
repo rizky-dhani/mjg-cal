@@ -14,8 +14,6 @@ class CustomerForm
             ->components([
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 TextInput::make('phone_number')
                     ->tel()
                     ->default(null),

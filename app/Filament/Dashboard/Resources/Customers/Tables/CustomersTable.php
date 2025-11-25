@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Resources\Customers\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -19,25 +20,23 @@ class CustomersTable
                 TextColumn::make('slug')
                     ->searchable(),
                 TextColumn::make('phone_number')
+                    ->label('Phone Number')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('address')
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->successNotificationTitle('Customer updated successfully'),
+                DeleteAction::make()
+                    ->successNotificationTitle('Customer deleted successfully')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->successNotificationTitle('Selected Customer(s) deleted successfully'),
                 ]),
             ]);
     }
