@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Customer;
 use App\Models\DeviceName;
+use App\Models\Location;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -21,10 +22,10 @@ return new class extends Migration
             $table->uuid('deviceId')->unique();
             $table->foreignIdFor(DeviceName::class)->nullable()->constrained('device_names');
             $table->string('device_number')->nullable()->unique();
+            $table->string('serial_number')->nullable();
             $table->foreignIdFor(Brand::class)->nullable()->constrained('brands');
             $table->foreignIdFor(Type::class)->nullable()->constrained('types');
-            $table->string('serial_number')->nullable();
-            $table->foreignIdFor('location_id')->nullable()->constrained('locations');
+            $table->foreignIdFor(Location::class)->nullable()->constrained('locations');
             $table->year('procurement_year')->nullable();
             $table->foreignIdFor(User::class, 'pic_id')->nullable()->constrained('users');
             $table->foreignIdFor(Customer::class)->nullable()->constrained('customers');
@@ -32,8 +33,8 @@ return new class extends Migration
             $table->date('next_calibration_date')->nullable();
             $table->string('cert_number')->nullable();
             $table->string('barcode')->nullable();
-            $table->enum('result', ['Laik Pakai', 'Tidak Laik Pakai'])->nullable();
-            $table->enum('status', ['Tersedia', 'Tidak Tersedia'])->default('Available');
+            $table->enum('result', ['Fit For Use', 'Not Fit For Use'])->nullable();
+            $table->enum('status', ['Available', 'Unavailable'])->default('Available');
             $table->text('notes')->nullable();
             $table->foreignIdFor(User::class, 'admin_id')->nullable()->constrained('users');
             $table->timestamps();

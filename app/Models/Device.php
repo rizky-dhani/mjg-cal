@@ -10,26 +10,7 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'deviceId',
-        'device_name_id',
-        'device_number',
-        'brand_id',
-        'type_id',
-        'serial_number',
-        'location',
-        'procurement_year',
-        'pic_id',
-        'customer_id',
-        'calibrated_date',
-        'next_calibration_date',
-        'cert_number',
-        'barcode',
-        'result',
-        'status',
-        'notes',
-        'admin_id',
-    ];
+    protected $guarded = ['id'];
 
     public function getRouteKeyName()
     {

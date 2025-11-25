@@ -2,6 +2,7 @@
 
 namespace App\Filament\Dashboard\Resources\Devices\Schemas;
 
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -18,31 +19,83 @@ class DeviceForm
             ->components([
                 Select::make('device_name_id')
                     ->relationship('deviceName', 'name')
+                    ->preload()
+                    ->createOptionModalHeading('Add New Device Name')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->columnSpanFull()
+                            ->required(),
+                    ])
+                    ->columnSpanFull()
                     ->required(),
-                TextInput::make('serial_number')
-                    ->default(null),
-                Select::make('brand_id')
-                    ->relationship('brand', 'name')
-                    ->default(null),
-                Select::make('type_id')
-                    ->relationship('type', 'name')
-                    ->default(null),
-                TextInput::make('location')
-                    ->default(null),
-                TextInput::make('procurement_year')
-                    ->default(null),
+                Grid::make(3)
+                    ->schema([
+                        TextInput::make('serial_number')
+                            ->default(null),
+                        Select::make('brand_id')
+                            ->relationship('brand', 'name')
+                            ->preload()
+                            ->createOptionModalHeading('Add New Brand')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->columnSpanFull()
+                                    ->required(),
+                            ])
+                            ->default(null),
+                        Select::make('type_id')
+                            ->relationship('type', 'name')
+                            ->preload()
+                            ->createOptionModalHeading('Add New Type')
+                            ->createOptionForm([
+                                Select::make('brand_id')
+                                    ->label('Brand')
+                                    ->relationship('brand', 'name')
+                                    ->preload()
+                                    ->required(),
+                                TextInput::make('name')
+                                    ->required(),
+                            ]),
+                        ])
+                        ->columnSpanFull(),
+                Select::make('location_id')
+                    ->relationship('location', 'name')
+                    ->preload()
+                    ->createOptionModalHeading('Add New Location')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required()
+                            ->columnSpanFull(),
+                    ]),
                 Select::make('customer_id')
                     ->relationship('customer', 'name')
+                    ->preload()
+                    ->createOptionModalHeading('Add New Type')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required(),
+                        TextInput::make('phone_number')
+                            ->tel()
+                            ->required()
+                            ->default(null),
+                        Textarea::make('address')
+                            ->default(null)
+                            ->columnSpanFull(),
+                    ]),
+                TextInput::make('procurement_year')
                     ->default(null),
-                DatePicker::make('calibrated_date'),
+                DatePicker::make('calibrated_date')
+                    ->label('Last Calibrated Date')
+                    ->native(false)
+                    ->displayFormat('d/m/Y')
+                    ->format('Y-m-d'),
                 Select::make('result')
                 ->options([
-                    'Laik Pakai' => 'Laik Pakai',
-                    'Tidak Laik Pakai' => 'Tidak Laik Pakai',
+                    'Fit For Use' => 'Fit For Use',
+                    'Not Fit For Use' => 'Not Fit For Use',
                 ]),
                 Select::make('status')
-                ->options(['Tersedia' => 'Tersedia', 'Tidak Tersedia' => 'Tidak Tersedia'])
-                    ->default('Tersedia')
+                ->options(['Available' => 'Available', 'Unavailable' => 'Unavailable'])
+                    ->default('Available')
                     ->required(),
                 FileUpload::make('cert_number')
                     ->disk('public')

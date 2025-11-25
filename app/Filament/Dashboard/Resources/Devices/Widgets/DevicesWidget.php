@@ -8,6 +8,8 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class DevicesWidget extends StatsOverviewWidget
 {
+    protected ?string $heading = 'QR Devices';
+    protected static ?string $pollingInterval = null;
     protected function getStats(): array
     {
         // Count total devices
@@ -42,6 +44,9 @@ class DevicesWidget extends StatsOverviewWidget
             ->whereNull('cert_number')
             ->count();
 
+        // Count partially filled devices - where some but not all non-exception fields are null
+        $partiallyFilledDevices = $totalDevices - $filledDevices - $emptyDevices;
+
         return [
             Stat::make('Total Devices', $totalDevices)
                 ->description('Device(s)')
@@ -53,7 +58,7 @@ class DevicesWidget extends StatsOverviewWidget
                 ->descriptionIcon('heroicon-m-check-circle')
                 ->color('success')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
-                    'tableFilters' => [
+                    'filters' => [
                         'filled' => [
                             'isActive' => 'true'
                         ],
@@ -63,12 +68,24 @@ class DevicesWidget extends StatsOverviewWidget
                     ],
                 ])),
 
+            Stat::make('Partially Filled Devices', $partiallyFilledDevices)
+                ->description('Device(s)')
+                ->descriptionIcon('heroicon-m-minus-circle')
+                ->color('warning')
+                ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
+                    'filters' => [
+                        'partially_filled' => [
+                            'isActive' => 'true'
+                        ],
+                    ],
+                ])),
+
             Stat::make('Empty Devices', $emptyDevices)
                 ->description('Device(s)')
                 ->descriptionIcon('heroicon-m-x-circle')
                 ->color('danger')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
-                    'tableFilters' => [
+                    'filters' => [
                         'filled' => [
                             'isActive' => 'false'
                         ],

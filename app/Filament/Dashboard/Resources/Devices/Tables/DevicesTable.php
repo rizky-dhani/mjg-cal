@@ -119,6 +119,38 @@ class DevicesTable
                             ->whereNull('next_calibration_date')
                             ->whereNull('cert_number');
                     }),
+                \Filament\Tables\Filters\Filter::make('partially_filled')
+                    ->label('Partially Filled Devices')
+                    ->query(function ($query) {
+                        return $query->where(function($q) {
+                            $q->whereNotNull('device_name_id')
+                                ->orWhereNotNull('device_number')
+                                ->orWhereNotNull('brand_id')
+                                ->orWhereNotNull('type_id')
+                                ->orWhereNotNull('serial_number')
+                                ->orWhereNotNull('location_id')
+                                ->orWhereNotNull('procurement_year')
+                                ->orWhereNotNull('pic_id')
+                                ->orWhereNotNull('customer_id')
+                                ->orWhereNotNull('calibration_date')
+                                ->orWhereNotNull('next_calibration_date')
+                                ->orWhereNotNull('cert_number');
+                        })
+                        ->where(function($q) {
+                            $q->whereNull('device_name_id')
+                                ->orWhereNull('device_number')
+                                ->orWhereNull('brand_id')
+                                ->orWhereNull('type_id')
+                                ->orWhereNull('serial_number')
+                                ->orWhereNull('location_id')
+                                ->orWhereNull('procurement_year')
+                                ->orWhereNull('pic_id')
+                                ->orWhereNull('customer_id')
+                                ->orWhereNull('calibration_date')
+                                ->orWhereNull('next_calibration_date')
+                                ->orWhereNull('cert_number');
+                        });
+                    }),
             ])
             ->recordActions([
                 Action::make('View')
