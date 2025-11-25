@@ -39,6 +39,12 @@ class DashboardPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                                ->label(fn() => auth()->user()->name)
+                                ->url(fn()=> EditProfile::getUrl())
+                                ->icon(Heroicon::UserCircle)
+            ])
             ->navigationGroups([
                 NavigationGroup::make('Inventories'),
                 NavigationGroup::make('Devices'),

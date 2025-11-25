@@ -32,4 +32,5 @@ class EditProfile extends BaseEditProfile
     {
         return Dashboard::getUrl();
     }
+    
 }
