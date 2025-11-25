@@ -7,6 +7,7 @@ use App\Filament\Dashboard\Resources\Inventories\Schemas\InventoryForm;
 use App\Filament\Dashboard\Resources\Inventories\Tables\InventoriesTable;
 use App\Models\Inventory;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -16,7 +17,8 @@ class InventoryResource extends Resource
 {
     protected static ?string $model = Inventory::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ArchiveBox;
+    protected static string|UnitEnum|null $navigationGroup = 'Inventories';
 
     public static function form(Schema $schema): Schema
     {

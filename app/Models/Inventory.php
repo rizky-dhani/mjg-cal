@@ -9,13 +9,15 @@ class Inventory extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'inventory_number',
-        'device_id',
-        'customer_id',
-        'location',
-        'status',
-    ];
+    protected $guarded = ['id'];
+
+    /**
+     * An inventory belongs to a device
+     */
+    public function deviceName()
+    {
+        return $this->belongsTo(Device::class);
+    }
 
     /**
      * An inventory belongs to a device

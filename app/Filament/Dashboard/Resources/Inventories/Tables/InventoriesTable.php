@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Resources\Inventories\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -39,11 +40,15 @@ class InventoriesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->successNotificationTitle('Inventory updated successfully'),
+                DeleteAction::make()
+                    ->successNotificationTitle('Inventory deleted successfully'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->successNotificationTitle('Selected Inventories updated successfully'),
                 ]),
             ]);
     }

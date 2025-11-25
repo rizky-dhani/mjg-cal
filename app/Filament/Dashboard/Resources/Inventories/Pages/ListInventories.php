@@ -2,9 +2,10 @@
 
 namespace App\Filament\Dashboard\Resources\Inventories\Pages;
 
-use App\Filament\Dashboard\Resources\Inventories\InventoryResource;
+use Filament\Support\Enums\Width;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Dashboard\Resources\Inventories\InventoryResource;
 
 class ListInventories extends ListRecords
 {
@@ -13,7 +14,9 @@ class ListInventories extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->modalWidth(Width::SevenExtraLarge)
+                ->successNotificationTitle('Inventories created successfully'),
         ];
     }
 }
