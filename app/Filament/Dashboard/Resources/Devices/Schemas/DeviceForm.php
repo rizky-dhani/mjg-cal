@@ -20,6 +20,7 @@ class DeviceForm
                 Select::make('device_name_id')
                     ->relationship('deviceName', 'name')
                     ->preload()
+                    ->searchable()
                     ->createOptionModalHeading('Add New Device Name')
                     ->createOptionForm([
                         TextInput::make('name')
@@ -35,6 +36,7 @@ class DeviceForm
                         Select::make('brand_id')
                             ->relationship('brand', 'name')
                             ->preload()
+                            ->searchable()
                             ->createOptionModalHeading('Add New Brand')
                             ->createOptionForm([
                                 TextInput::make('name')
@@ -45,11 +47,13 @@ class DeviceForm
                         Select::make('type_id')
                             ->relationship('type', 'name')
                             ->preload()
+                            ->searchable()
                             ->createOptionModalHeading('Add New Type')
                             ->createOptionForm([
                                 Select::make('brand_id')
                                     ->label('Brand')
                                     ->relationship('brand', 'name')
+                                    ->searchable()
                                     ->preload()
                                     ->required(),
                                 TextInput::make('name')
@@ -60,6 +64,7 @@ class DeviceForm
                 Select::make('location_id')
                     ->relationship('location', 'name')
                     ->preload()
+                    ->searchable()
                     ->createOptionModalHeading('Add New Location')
                     ->createOptionForm([
                         TextInput::make('name')
@@ -69,7 +74,8 @@ class DeviceForm
                 Select::make('customer_id')
                     ->relationship('customer', 'name')
                     ->preload()
-                    ->createOptionModalHeading('Add New Type')
+                    ->searchable()
+                    ->createOptionModalHeading('Add New Customer')
                     ->createOptionForm([
                         TextInput::make('name')
                             ->required(),
@@ -87,14 +93,15 @@ class DeviceForm
                     ->label('Last Calibrated Date')
                     ->native(false)
                     ->displayFormat('d/m/Y')
-                    ->format('Y-m-d'),
+                    ->format('Y-m-d')
+                    ->closeOnDateSelection(),
                 Select::make('result')
-                ->options([
-                    'Fit For Use' => 'Fit For Use',
-                    'Not Fit For Use' => 'Not Fit For Use',
-                ]),
+                    ->options([
+                        'Fit For Use' => 'Fit For Use',
+                        'Not Fit For Use' => 'Not Fit For Use',
+                    ]),
                 Select::make('status')
-                ->options(['Available' => 'Available', 'Unavailable' => 'Unavailable'])
+                    ->options(['Available' => 'Available', 'Unavailable' => 'Unavailable'])
                     ->default('Available')
                     ->required(),
                 FileUpload::make('cert_number')

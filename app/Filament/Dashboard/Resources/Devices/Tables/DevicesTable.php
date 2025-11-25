@@ -172,7 +172,8 @@ class DevicesTable
                         }
 
                         return $data;
-                    }),
+                    })
+                    ->successNotificationTitle('Device updated successfully'),
                 DeleteAction::make()
                     ->requiresConfirmation()
                     ->successNotificationTitle('Device and QR code deleted successfully')
@@ -200,7 +201,8 @@ class DevicesTable
 
                             // Delete the records from the database
                             $records->each->delete();
-                        }),
+                        })
+                        ->successNotificationTitle('Selected Device(s) successfully'),
                 ]),
             ]);
     }
