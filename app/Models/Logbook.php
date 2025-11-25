@@ -9,17 +9,7 @@ class Logbook extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'log_number',
-        'date',
-        'inventory_id',
-        'accessories',
-        'start_date',
-        'end_date',
-        'location',
-        'pic_id',
-        'status',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * A logbook belongs to an inventory
@@ -27,6 +17,14 @@ class Logbook extends Model
     public function inventory()
     {
         return $this->belongsTo(Inventory::class);
+    }
+
+    /**
+     * A logbook belongs to a location
+     */
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 
     /**

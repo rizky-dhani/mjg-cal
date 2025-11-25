@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Inventory;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,14 +17,13 @@ return new class extends Migration
         Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
             $table->string('log_number')->unique();
-            $table->date('date');
-            $table->foreignIdFor(Inventory::class);
+            $table->foreignIdFor(Inventory::class)->constrained('inventories');
             $table->text('accessories')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('location');
-            $table->foreignIdFor(User::class, 'pic_id');
-            $table->enum('status', ['Available', 'Borrowed']);
+            $table->foreignIdFor(Location::class)->constrained('locations');
+            $table->foreignIdFor(User::class, 'pic_id')->constrained('users');
+            $table->enum('status', ['Available', 'Borrowed', 'Returned']);
             $table->timestamps();
         });
     }

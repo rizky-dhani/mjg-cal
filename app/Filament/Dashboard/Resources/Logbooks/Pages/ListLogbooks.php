@@ -2,9 +2,10 @@
 
 namespace App\Filament\Dashboard\Resources\Logbooks\Pages;
 
-use App\Filament\Dashboard\Resources\Logbooks\LogbookResource;
+use Filament\Support\Enums\Width;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Dashboard\Resources\Logbooks\LogbookResource;
 
 class ListLogbooks extends ListRecords
 {
@@ -13,7 +14,9 @@ class ListLogbooks extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->modalWidth(Width::SevenExtraLarge)
+                ->successNotificationTitle('Log created successfully'),
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Filament\Dashboard\Resources\Logbooks\Schemas\LogbookForm;
 use App\Filament\Dashboard\Resources\Logbooks\Tables\LogbooksTable;
 use App\Models\Logbook;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -16,7 +17,8 @@ class LogbookResource extends Resource
 {
     protected static ?string $model = Logbook::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
+    protected static string|UnitEnum|null $navigationGroup = 'Inventories';
 
     public static function form(Schema $schema): Schema
     {
