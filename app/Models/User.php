@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Hash;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,6 +28,15 @@ class User extends Authenticatable
         'customer_id',
     ];
 
+    /**
+     * Set password automatically upon User creation
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($user) {
+            $user->password = Hash::make('Calibration2025!');
+        });
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
