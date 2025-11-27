@@ -11,7 +11,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-any-user');
     }
 
     /**
@@ -19,7 +19,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-user');
     }
 
     /**
@@ -27,7 +27,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('create-user');
     }
 
     /**
@@ -35,7 +35,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('update-user');
     }
 
     /**
@@ -43,22 +43,14 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('delete-user');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can reset user's password.
      */
-    public function restore(User $user, User $model): bool
+    public function resetPassword(User $user, User $model): bool
     {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        return $user->hasRole('Super Admin');
+        return $user->can('reset-password-user');
     }
 }

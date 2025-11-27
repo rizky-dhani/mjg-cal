@@ -12,7 +12,7 @@ class InventoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-any-inventory');
     }
 
     /**
@@ -20,7 +20,7 @@ class InventoryPolicy
      */
     public function view(User $user, Inventory $inventory): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-inventory');
     }
 
     /**
@@ -28,7 +28,7 @@ class InventoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('create-inventory');
     }
 
     /**
@@ -36,7 +36,7 @@ class InventoryPolicy
      */
     public function update(User $user, Inventory $inventory): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('update-inventory');
     }
 
     /**
@@ -44,22 +44,6 @@ class InventoryPolicy
      */
     public function delete(User $user, Inventory $inventory): bool
     {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Inventory $inventory): bool
-    {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Inventory $inventory): bool
-    {
-        return $user->hasRole('Super Admin');
+        return $user->can('delete-inventory');
     }
 }

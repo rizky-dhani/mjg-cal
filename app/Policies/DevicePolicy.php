@@ -12,7 +12,7 @@ class DevicePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-any-device');
     }
 
     /**
@@ -20,7 +20,7 @@ class DevicePolicy
      */
     public function view(User $user, Device $device): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-device');
     }
 
     /**
@@ -28,7 +28,7 @@ class DevicePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('create-device');
     }
 
     /**
@@ -36,7 +36,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('update-device');
     }
 
     /**
@@ -44,22 +44,6 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device): bool
     {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Device $device): bool
-    {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Device $device): bool
-    {
-        return $user->hasRole('Super Admin');
+        return $user->can('delete-device');
     }
 }
