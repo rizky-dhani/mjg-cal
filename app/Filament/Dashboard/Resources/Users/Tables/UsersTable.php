@@ -38,6 +38,7 @@ class UsersTable
                     ->icon(Heroicon::ArrowPathRoundedSquare)
                     ->color('warning')
                     ->requiresConfirmation()
+                    ->visible(fn() => auth()->user()->can('reset-password-users'))
                     ->action(function($record){
                         $record->update([
                             'password' => Hash::make('Calibration2025!')

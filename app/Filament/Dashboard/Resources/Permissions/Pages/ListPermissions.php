@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Resources\Permissions\Pages;
 
 use App\Services\GeneratePermissionsService;
+use Filament\Notifications\Notification;
 use Filament\Support\Enums\Width;
 use Filament\Actions\{
     Action,
@@ -27,9 +28,15 @@ class ListPermissions extends ListRecords
                     $generatedPermissions = $service->generate();
 
                     if (count($generatedPermissions) > 0) {
-                        $this->notify('success', count($generatedPermissions) . ' permissions generated successfully!');
+                        Notification::make()
+                            ->title(fn() => count($generatedPermissions)." permissions generated sucessfully")
+                            ->success()
+                            ->send();
                     } else {
-                        $this->notify('info', 'No new permissions were generated.');
+                        Notification::make()
+                            ->title('No permission(s) generated')
+                            ->danger()
+                            ->send();
                     }
                 })
                 ->requiresConfirmation()
