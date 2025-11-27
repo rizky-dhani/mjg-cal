@@ -17,6 +17,9 @@ class UsersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function($query){
+                $query->where('id', '!=', auth()->user()->id)->orderByDesc('created_at');
+            })
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
@@ -25,6 +28,7 @@ class UsersTable
                     ->searchable(),
                 TextColumn::make('initial')
                     ->searchable(),
+                TextColumn::make('roles.name')
             ])
             ->filters([
                 //

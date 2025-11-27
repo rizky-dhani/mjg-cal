@@ -13,7 +13,7 @@ class LocationPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can('view-any-location');
     }
 
     /**
@@ -21,7 +21,7 @@ class LocationPolicy
      */
     public function view(User $user, Location $location): bool
     {
-        return false;
+        return $user->can('view-location');
     }
 
     /**
@@ -29,7 +29,7 @@ class LocationPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can('create-location');
     }
 
     /**
@@ -37,7 +37,7 @@ class LocationPolicy
      */
     public function update(User $user, Location $location): bool
     {
-        return false;
+        return $user->can('update-location');
     }
 
     /**
@@ -45,22 +45,6 @@ class LocationPolicy
      */
     public function delete(User $user, Location $location): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Location $location): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Location $location): bool
-    {
-        return false;
+        return $user->can('delete-location');
     }
 }

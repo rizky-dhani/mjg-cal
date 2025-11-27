@@ -12,7 +12,7 @@ class LogbookPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-any-logbook');
     }
 
     /**
@@ -20,7 +20,7 @@ class LogbookPolicy
      */
     public function view(User $user, Logbook $logbook): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-logbook');
     }
 
     /**
@@ -28,7 +28,7 @@ class LogbookPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('create-logbook');
     }
 
     /**
@@ -36,7 +36,7 @@ class LogbookPolicy
      */
     public function update(User $user, Logbook $logbook): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('update-logbook');
     }
 
     /**
@@ -44,22 +44,6 @@ class LogbookPolicy
      */
     public function delete(User $user, Logbook $logbook): bool
     {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Logbook $logbook): bool
-    {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Logbook $logbook): bool
-    {
-        return $user->hasRole('Super Admin');
+        return $user->can('delete-logbook');
     }
 }

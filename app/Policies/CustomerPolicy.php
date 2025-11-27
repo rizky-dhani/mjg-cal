@@ -12,7 +12,7 @@ class CustomerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-any-customer');
     }
 
     /**
@@ -20,7 +20,7 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('view-customer');
     }
 
     /**
@@ -28,7 +28,7 @@ class CustomerPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('create-customer');
     }
 
     /**
@@ -36,7 +36,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer): bool
     {
-        return $user->hasRole('Super Admin');
+        return $user->can('update-customer');
     }
 
     /**
@@ -44,22 +44,6 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer): bool
     {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Customer $customer): bool
-    {
-        return $user->hasRole('Super Admin');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Customer $customer): bool
-    {
-        return $user->hasRole('Super Admin');
+        return $user->can('delete-customer');
     }
 }

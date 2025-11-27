@@ -2,9 +2,10 @@
 
 namespace App\Filament\Dashboard\Resources\Users\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DateTimePicker;
 
 class UserForm
 {
@@ -20,6 +21,10 @@ class UserForm
                     ->required(),
                 TextInput::make('initial')
                     ->required(),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name', fn($query) => $query->where('id', '!=', 1))
+                    ->preload()
             ]);
     }
 }

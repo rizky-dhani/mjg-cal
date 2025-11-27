@@ -4,10 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Hash;
+use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -19,14 +20,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'initial',
-        'password',
-        'role',
-        'customer_id',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * Set password automatically upon User creation
@@ -34,6 +28,7 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::creating(function ($user) {
+            $user->userId = Str::orderedUuid();
             $user->password = Hash::make('Calibration2025!');
         });
     }
