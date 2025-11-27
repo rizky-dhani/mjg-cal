@@ -34,6 +34,7 @@ class DashboardPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->spa()
+            ->brandName('Medquest Calibration')
             ->profile(EditProfile::class)
             ->maxContentWidth(Width::Full)
             ->colors([
