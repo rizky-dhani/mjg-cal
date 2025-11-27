@@ -51,6 +51,6 @@ class UserPolicy
      */
     public function resetPassword(User $user, User $model): bool
     {
-        return $user->can('reset-password-user');
+        return $user->can('reset-password-users');
     }
 }
