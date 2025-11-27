@@ -2,16 +2,16 @@
 
 namespace App\Filament\Dashboard\Resources\Permissions;
 
+use UnitEnum;
+use BackedEnum;
+use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
+use Spatie\Permission\Models\Permission;
 use App\Filament\Dashboard\Resources\Permissions\Pages\ListPermissions;
 use App\Filament\Dashboard\Resources\Permissions\Schemas\PermissionForm;
 use App\Filament\Dashboard\Resources\Permissions\Tables\PermissionsTable;
-use BackedEnum;
-use UnitEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Table;
-use App\Models\Permission;
 
 class PermissionResource extends Resource
 {

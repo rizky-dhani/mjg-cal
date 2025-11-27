@@ -2,18 +2,18 @@
 
 namespace App\Filament\Dashboard\Resources\Roles;
 
-use App\Filament\Dashboard\Resources\Roles\Pages\ListRoles;
+use UnitEnum;
+use BackedEnum;
+use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Spatie\Permission\Models\Role;
+use Filament\Support\Icons\Heroicon;
 use App\Filament\Dashboard\Resources\Roles\Pages\ViewRole;
-use App\Filament\Dashboard\Resources\Roles\RelationManagers\PermissionsRelationManager;
+use App\Filament\Dashboard\Resources\Roles\Pages\ListRoles;
 use App\Filament\Dashboard\Resources\Roles\Schemas\RoleForm;
 use App\Filament\Dashboard\Resources\Roles\Tables\RolesTable;
-use BackedEnum;
-use UnitEnum;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Table;
-use App\Models\Role;
+use App\Filament\Dashboard\Resources\Roles\RelationManagers\PermissionsRelationManager;
 
 class RoleResource extends Resource
 {
