@@ -4,12 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Type extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    /**
+     * Automatic slug generation based on name change
+     */
+    protected static function booted()
+    {
+        static::saving(function($type){
+            $type->slug = Str::slug($type->name);
+        });
+    }
 
     /**
      * A type belongs to a brand
