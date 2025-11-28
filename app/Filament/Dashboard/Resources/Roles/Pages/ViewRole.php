@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Spatie\Permission\Models\Role;
 use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Spatie\Permission\Models\Permission;
@@ -37,6 +38,20 @@ class ViewRole extends ViewRecord
                         ->preload()
                         ->searchable()
                         ->multiple()
+                        ->createOptionUsing(function (array $data) {
+                            return Permission::create($data)->id;
+                        })
+                        ->createOptionModalHeading('Add New Permission')
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->required(),
+                            Select::make('guard_name')
+                                ->options([
+                                    'web' => 'web'
+                                ])
+                                ->default('web')
+                                ->required(),
+                        ])
                 ])
                 ->action(function (array $data): void {
                     $role = $this->getRecord();
