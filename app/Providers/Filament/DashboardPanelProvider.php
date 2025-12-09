@@ -34,11 +34,13 @@ class DashboardPanelProvider extends PanelProvider
             ->path('dashboard')
             ->login()
             ->spa()
-            ->brandName('Medquest Calibration')
+            ->brandName('Rena')
+            ->brandLogo(fn() => asset('assets/images/logos/Rena-Logo.webp'))
+            ->brandLogoHeight('4em')
             ->profile(EditProfile::class)
             ->maxContentWidth(Width::Full)
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Red,
             ])
             ->userMenuItems([
                 'profile' => MenuItem::make()
