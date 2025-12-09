@@ -9,7 +9,7 @@
                         <div class="mb-4">
                             <img src="{{ asset('assets/images/logos/Rena-Logo.webp') }}"
                                  alt="Rena Logo"
-                                 class="mx-auto max-w-[150px] sm:max-w-[180px] md:max-w-[200px] h-auto object-contain">
+                                 class="mx-auto max-w-[150px] sm:max-w-[180px] md:max-w-[250px] h-auto object-contain">
                         </div>
 
                         <!-- QR Code -->
