@@ -16,8 +16,10 @@ class BrandsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('brands.columns.name'))
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label(__('brands.columns.slug'))
                     ->searchable(),
             ])
             ->filters([
@@ -25,14 +27,17 @@ class BrandsTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Brand updated successfully'),
+                    ->label(__('brands.actions.edit'))
+                    ->successNotificationTitle(__('brands.actions.edit_success', ['label' => __('brands.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Brand deleted successfully'),
+                    ->label(__('brands.actions.delete'))
+                    ->successNotificationTitle(__('brands.actions.delete_success', ['label' => __('brands.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->successNotificationTitle('Selected Brand(s) deleted successfully'),
+                        ->label(__('brands.actions.delete'))
+                        ->successNotificationTitle(__('brands.actions.delete_multiple_success', ['label' => __('brands.plural_label')])),
                 ]),
             ]);
     }

@@ -22,19 +22,23 @@ class UsersTable
             })
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('users.columns.name'))
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('users.columns.email'))
                     ->searchable(),
                 TextColumn::make('initial')
+                    ->label(__('users.columns.initial'))
                     ->searchable(),
                 TextColumn::make('roles.name')
+                    ->label(__('users.columns.roles'))
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 Action::make('reset_password')
+                    ->label(__('users.actions.reset_password'))
                     ->icon(Heroicon::ArrowPathRoundedSquare)
                     ->color('warning')
                     ->requiresConfirmation()
@@ -44,16 +48,19 @@ class UsersTable
                             'password' => Hash::make('Calibration2025!')
                         ]);
                     })
-                    ->successNotificationTitle('User Password reseted successfully'),
+                    ->successNotificationTitle(__('users.actions.reset_password_success')),
                 EditAction::make()
-                    ->successNotificationTitle('User updated successfully'),
+                    ->label(__('users.actions.edit'))
+                    ->successNotificationTitle(__('users.actions.edit_success', ['label' => __('users.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('User deleted successfully'),
+                    ->label(__('users.actions.delete'))
+                    ->successNotificationTitle(__('users.actions.delete_success', ['label' => __('users.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->successNotificationTitle('Selected User(s) deleted successfully'),
+                    ->label(__('users.actions.delete'))
+                    ->successNotificationTitle(__('users.actions.delete_multiple_success', ['label' => __('users.plural_label')])),
                 ]),
             ]);
     }

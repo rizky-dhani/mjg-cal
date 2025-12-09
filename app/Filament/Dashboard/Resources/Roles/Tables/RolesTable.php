@@ -16,8 +16,10 @@ class RolesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('roles.columns.name'))
                     ->searchable(),
                 TextColumn::make('guard_name')
+                    ->label(__('roles.columns.guard_name'))
                     ->searchable(),
             ])
             ->filters([
@@ -25,16 +27,20 @@ class RolesTable
             ])
             ->recordActions([
                 \Filament\Actions\ViewAction::make()
+                    ->label(__('roles.actions.view'))
                     ->color('dark'),
                 EditAction::make()
-                    ->successNotificationTitle('Role updated successfully'),
+                    ->label(__('roles.actions.edit'))
+                    ->successNotificationTitle(__('roles.actions.edit_success', ['label' => __('roles.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Role deleted successfully'),
+                    ->label(__('roles.actions.delete'))
+                    ->successNotificationTitle(__('roles.actions.delete_success', ['label' => __('roles.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->successNotificationTitle('Selected Role(s) deleted successfully'),
+                        ->label(__('roles.actions.delete'))
+                        ->successNotificationTitle(__('roles.actions.delete_multiple_success', ['label' => __('roles.plural_label')])),
                 ]),
             ]);
     }

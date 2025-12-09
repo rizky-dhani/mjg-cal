@@ -17,40 +17,43 @@ class InventoriesTable
         return $table
             ->columns([
                 TextColumn::make('inventory_number')
-                    ->label('Inv Number')
+                    ->label(__('inventories.columns.inventory_number'))
                     ->searchable(),
                 TextColumn::make('deviceName.name')
-                    ->label('Device Name'),
+                    ->label(__('inventories.columns.device_name')),
                 TextColumn::make('serial_number')
-                    ->label('Serial Number')
+                    ->label(__('inventories.columns.serial_number'))
                     ->searchable(),
                 TextColumn::make('brand.name')
-                    ->label('Brand')
+                    ->label(__('inventories.columns.brand'))
                     ->searchable(),
                 TextColumn::make('type.name')
-                    ->label('Type')
+                    ->label(__('inventories.columns.type'))
                     ->searchable(),
                 TextColumn::make('procurement_year')
-                    ->label('Procurement Year')
+                    ->label(__('inventories.columns.procurement_year'))
                     ->searchable(),
                 TextColumn::make('location.name')
-                    ->label('Location')
+                    ->label(__('inventories.columns.location_id'))
                     ->searchable(),
                 TextColumn::make('last_calibration_date')
-                    ->label('Last Calibration')
+                    ->label(__('inventories.columns.last_calibration_date'))
                     ->formatStateUsing(fn($record) => Carbon::parse($record->last_calibration_date)->format('d M Y'))
                     ->searchable(),
                 TextColumn::make('next_calibration_date')
-                    ->label('Next Calibration')
+                    ->label(__('inventories.columns.next_calibration_date'))
                     ->formatStateUsing(fn($record) => Carbon::parse($record->next_calibration_date)->format('d M Y') ?? 'N/A')
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label(__('inventories.columns.status'))
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label(__('inventories.columns.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('inventories.columns.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -60,14 +63,17 @@ class InventoriesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Inventory updated successfully'),
+                    ->label(__('inventories.actions.edit'))
+                    ->successNotificationTitle(__('inventories.actions.edit_success', ['label' => __('inventories.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Inventory deleted successfully'),
+                    ->label(__('inventories.actions.delete'))
+                    ->successNotificationTitle(__('inventories.actions.delete_success', ['label' => __('inventories.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->successNotificationTitle('Selected Inventories updated successfully'),
+                    ->label(__('inventories.actions.delete'))
+                    ->successNotificationTitle(__('inventories.actions.delete_multiple_success', ['label' => __('inventories.plural_label')])),
                 ]),
             ]);
     }

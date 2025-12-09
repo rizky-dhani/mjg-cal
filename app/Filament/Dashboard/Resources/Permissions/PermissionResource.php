@@ -18,7 +18,22 @@ class PermissionResource extends Resource
     protected static ?string $model = Permission::class;
     protected static ?string $recordTitleAttribute = 'name';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::LockClosed;
-    protected static string|UnitEnum|null $navigationGroup = 'User Management';
+
+    public static function getModelLabel(): string
+    {
+        return __('permissions.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('permissions.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.User Management');
+    }
+
     public static function canViewAny(): bool
     {
         $user = auth()->user();

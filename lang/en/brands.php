@@ -1,0 +1,38 @@
+<?php
+
+return [
+    'label' => 'Brand',
+    'plural_label' => 'Brands',
+    'navigation_label' => 'Brands',
+
+    'columns' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'description' => 'Description',
+        'created_at' => 'Created at',
+        'updated_at' => 'Updated at',
+    ],
+
+    'actions' => [
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'view' => 'View',
+        'create' => 'Create',
+        'cancel' => 'Cancel',
+        'edit_success' => ':label successfully updated',
+        'delete_success' => ':label successfully deleted',
+        'delete_multiple_success' => 'Selected :label successfully deleted',
+    ],
+
+    'form' => [
+        'name' => [
+            'label' => 'Name',
+        ],
+        'description' => [
+            'label' => 'Description',
+        ],
+        'slug' => [
+            'label' => 'Slug',
+        ],
+    ],
+];

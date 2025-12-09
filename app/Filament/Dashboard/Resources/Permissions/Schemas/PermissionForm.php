@@ -13,8 +13,10 @@ class PermissionForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('permissions.form.name.label'))
                     ->required(),
                 Select::make('guard_name')
+                    ->label(__('permissions.form.guard_name.label'))
                     ->options([
                         'web' => 'web'
                     ])

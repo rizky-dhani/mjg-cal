@@ -16,8 +16,10 @@ class PermissionsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('permissions.columns.name'))
                     ->searchable(),
                 TextColumn::make('guard_name')
+                    ->label(__('permissions.columns.guard_name'))
                     ->searchable(),
             ])
             ->filters([
@@ -25,14 +27,17 @@ class PermissionsTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Permission updated successfully'),
+                    ->label(__('permissions.actions.edit'))
+                    ->successNotificationTitle(__('permissions.actions.edit_success', ['label' => __('permissions.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Permission deleted successfully'),
+                    ->label(__('permissions.actions.delete'))
+                    ->successNotificationTitle(__('permissions.actions.delete_success', ['label' => __('permissions.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->successNotificationTitle('Selected Permission(s) deleted successfully'),
+                        ->label(__('permissions.actions.delete'))
+                        ->successNotificationTitle(__('permissions.actions.delete_multiple_success', ['label' => __('permissions.plural_label')])),
                 ]),
             ]);
     }

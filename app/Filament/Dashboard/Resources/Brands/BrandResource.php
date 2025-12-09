@@ -19,9 +19,30 @@ class BrandResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Devices';
+    public static function getModelLabel(): string
+    {
+        return __('brands.label');
+    }
 
-    protected static ?string $navigationParentItem = 'Devices';
+    public static function getPluralModelLabel(): string
+    {
+        return __('brands.plural_label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('brands.navigation_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.Devices');
+    }
+
+    public static function getNavigationParentItem(): ?string
+    {
+        return __('navigation.Devices');
+    }
 
     public static function form(Schema $schema): Schema
     {

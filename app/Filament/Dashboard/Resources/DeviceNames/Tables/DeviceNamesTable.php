@@ -16,8 +16,10 @@ class DeviceNamesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('devicenames.columns.name'))
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label(__('devicenames.columns.slug'))
                     ->searchable(),
             ])
             ->filters([
@@ -25,14 +27,17 @@ class DeviceNamesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Device Name updated successfully'),
+                    ->label(__('devicenames.actions.edit'))
+                    ->successNotificationTitle(__('devicenames.actions.edit_success', ['label' => __('devicenames.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Device Name deleted successfully'),
+                    ->label(__('devicenames.actions.delete'))
+                    ->successNotificationTitle(__('devicenames.actions.delete_success', ['label' => __('devicenames.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->successNotificationTitle('Selected Device Name(s) deleted successfully'),
+                        ->label(__('devicenames.actions.delete'))
+                        ->successNotificationTitle(__('devicenames.actions.delete_multiple_success', ['label' => __('devicenames.plural_label')])),
                 ]),
             ]);
     }

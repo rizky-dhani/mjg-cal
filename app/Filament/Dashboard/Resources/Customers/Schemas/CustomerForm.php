@@ -13,11 +13,14 @@ class CustomerForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('customers.form.name.label'))
                     ->required(),
                 TextInput::make('phone_number')
+                    ->label(__('customers.form.phone_number.label'))
                     ->tel()
                     ->default(null),
                 Textarea::make('address')
+                    ->label(__('customers.form.address.label'))
                     ->default(null)
                     ->columnSpanFull(),
             ]);

@@ -13,17 +13,19 @@ class TypeForm
         return $schema
             ->components([
                 Select::make('brand_id')
-                    ->label('Brand')
+                    ->label(__('types.form.brand_id.label'))
                     ->relationship('brand', 'name')
-                    ->createOptionModalHeading('Add New Brand')
+                    ->createOptionModalHeading(__('types.form.create_brand_modal_heading'))
                     ->createOptionForm([
                         TextInput::make('name')
+                            ->label(__('types.form.name.label'))
                             ->columnSpanFull()
                             ->required(),
                     ])
                     ->preload()
                     ->required(),
                 TextInput::make('name')
+                    ->label(__('types.form.name.label'))
                     ->required(),
             ]);
     }

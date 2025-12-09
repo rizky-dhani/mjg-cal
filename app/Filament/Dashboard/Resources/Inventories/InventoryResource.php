@@ -18,7 +18,21 @@ class InventoryResource extends Resource
     protected static ?string $model = Inventory::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArchiveBox;
-    protected static string|UnitEnum|null $navigationGroup = 'Inventories';
+
+    public static function getModelLabel(): string
+    {
+        return __('inventories.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('inventories.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.Inventories');
+    }
 
     public static function form(Schema $schema): Schema
     {

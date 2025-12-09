@@ -20,8 +20,31 @@ class LocationResource extends Resource
     protected static ?string $model = Location::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    protected static string|UnitEnum|null $navigationGroup = 'Devices';
-    protected static ?string $navigationParentItem = 'Devices';
+
+    public static function getModelLabel(): string
+    {
+        return __('locations.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('locations.plural_label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('locations.navigation_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.Devices');
+    }
+
+    public static function getNavigationParentItem(): ?string
+    {
+        return __('navigation.Devices');
+    }
 
     public static function form(Schema $schema): Schema
     {

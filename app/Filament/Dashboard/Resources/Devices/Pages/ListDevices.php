@@ -18,6 +18,7 @@ class ListDevices extends ListRecords
             Action::make('generate_empty_qr')
                 ->label('Generate Empty QR Codes')
                 ->icon('heroicon-o-qr-code')
+                ->color('success')
                 ->form([
                     \Filament\Forms\Components\TextInput::make('number_of_qr')
                         ->label('Number of Empty QR Codes')

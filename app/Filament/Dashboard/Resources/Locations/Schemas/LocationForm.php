@@ -12,6 +12,7 @@ class LocationForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('locations.form.name.label'))
                     ->required()
                     ->columnSpanFull(),
             ]);

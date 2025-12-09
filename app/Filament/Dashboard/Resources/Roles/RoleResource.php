@@ -20,7 +20,22 @@ class RoleResource extends Resource
     protected static ?string $model = Role::class;
     protected static ?string $recordTitleAttribute = 'name';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
-    protected static string|UnitEnum|null $navigationGroup = 'User Management';
+
+    public static function getModelLabel(): string
+    {
+        return __('roles.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('roles.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.User Management');
+    }
+
     public static function canViewAny(): bool
     {
         $user = auth()->user();

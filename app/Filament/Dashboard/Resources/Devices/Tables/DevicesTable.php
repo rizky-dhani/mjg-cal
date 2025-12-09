@@ -17,60 +17,62 @@ class DevicesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn($query) => $query->orderByDesc('device_number'))
             ->columns([
                 TextColumn::make('device_name_id')
-                    ->label('Device Name')
+                    ->label(__('devices.columns.device_name_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->deviceName?->name ?? 'N/A'),
                 TextColumn::make('device_number')
-                    ->label('Device Number')
+                    ->label(__('devices.columns.device_number'))
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->device_number ?? 'N/A'),
                 TextColumn::make('brand_id')
-                    ->label('Brand')
+                    ->label(__('devices.columns.brand_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->brand?->name ?? 'N/A'),
                 TextColumn::make('type_id')
-                    ->label('Type')
+                    ->label(__('devices.columns.type_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->type?->name ?? 'N/A'),
                 TextColumn::make('serial_number')
-                    ->label('Serial Number')
+                    ->label(__('devices.columns.serial_number'))
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->serial_number ?? 'N/A'),
                 TextColumn::make('location.name')
-                    ->label('Location')
+                    ->label(__('devices.columns.location'))
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->location?->name ?? 'N/A'),
                 TextColumn::make('procurement_year')
-                    ->label('Procurement Year')
+                    ->label(__('devices.columns.procurement_year'))
                     ->getStateUsing(fn ($record) => $record->procurement_year ?: 'N/A'),
                 TextColumn::make('pic_id')
-                    ->label('PIC')
+                    ->label(__('devices.columns.pic_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->pic?->name ?? 'N/A'),
                 TextColumn::make('customer_id')
-                    ->label('Customer')
+                    ->label(__('devices.columns.customer_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->customer?->name ?? 'N/A'),
                 TextColumn::make('calibrated_date')
-                    ->label('Calibrated Date')
+                    ->label(__('devices.columns.calibrated_date'))
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->calibrated_date ? Carbon::parse($record->calibrated_date)->format('Y-m-d') : 'N/A'),
                 TextColumn::make('next_calibration_date')
-                    ->label('Next Calibration Date')
+                    ->label(__('devices.columns.next_calibration_date'))
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->next_calibration_date ? Carbon::parse($record->next_calibration_date)->format('Y-m-d') : 'N/A'),
                 TextColumn::make('cert_number')
+                    ->label(__('devices.columns.cert_number'))
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->cert_number ?? 'N/A'),
                 TextColumn::make('result')
-                    ->label('Result')
+                    ->label(__('devices.columns.result'))
                     ->searchable()
                     ->getStateUsing(fn ($record) => $record->result ?? 'N/A'),
                 TextColumn::make('status')
@@ -80,16 +82,17 @@ class DevicesTable
                         'Tidak Tersedia' => 'danger',
                         default => 'gray',
                     })
+                    ->label(__('devices.columns.status'))
                     ->getStateUsing(fn ($record) => $record->status ?? 'N/A'),
                 TextColumn::make('admin_id')
-                    ->label('Admin')
+                    ->label(__('devices.columns.admin_id'))
                     ->numeric()
                     ->sortable()
                     ->getStateUsing(fn ($record) => $record->admin?->name ?? 'N/A'),
             ])
             ->filters([
                 \Filament\Tables\Filters\Filter::make('filled')
-                    ->label('Filled Devices')
+                    ->label(__('devices.filters.filled.label'))
                     ->query(function ($query) {
                         return $query->whereNotNull('device_name_id')
                             ->whereNotNull('device_number')
@@ -105,7 +108,7 @@ class DevicesTable
                             ->whereNotNull('cert_number');
                     }),
                 \Filament\Tables\Filters\Filter::make('empty')
-                    ->label('Empty Devices')
+                    ->label(__('devices.filters.empty.label'))
                     ->query(function ($query) {
                         return $query->whereNull('device_name_id')
                             ->whereNull('brand_id')
@@ -120,7 +123,7 @@ class DevicesTable
                             ->whereNull('cert_number');
                     }),
                 \Filament\Tables\Filters\Filter::make('partially_filled')
-                    ->label('Partially Filled Devices')
+                    ->label(__('devices.filters.partially_filled.label'))
                     ->query(function ($query) {
                         return $query->where(function($q) {
                             $q->whereNotNull('device_name_id')
@@ -154,10 +157,14 @@ class DevicesTable
             ])
             ->recordActions([
                 Action::make('View')
+                    ->label(__('devices.actions.view'))
                     ->icon('heroicon-o-eye')
+                    ->color('dark')
                     ->openUrlInNewTab()
                     ->url(fn ($record) => route('devices.publicDetail', $record->deviceId)),
                 EditAction::make()
+                    ->label(__('devices.actions.edit'))
+                    ->color('info')
                     ->mutateFormDataUsing(function (array $data): array {
                         $user = auth()->user();
 
@@ -173,10 +180,12 @@ class DevicesTable
 
                         return $data;
                     })
-                    ->successNotificationTitle('Device updated successfully'),
+                    ->successNotificationTitle(__('devices.actions.edit_success', ['label' => __('devices.label')])),
                 DeleteAction::make()
+                    ->label(__('devices.actions.delete'))
+                    ->color( 'danger')
                     ->requiresConfirmation()
-                    ->successNotificationTitle('Device and QR code deleted successfully')
+                    ->successNotificationTitle(__('devices.actions.delete_success', ['label' => __('devices.label')]))
                     ->action(function ($record) {
                         // Delete the associated QR code file if it exists
                         if ($record->barcode) {
@@ -190,6 +199,7 @@ class DevicesTable
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
+                        ->label(__('devices.actions.delete'))
                         ->requiresConfirmation()
                         ->action(function ($records) {
                             foreach ($records as $record) {
@@ -202,7 +212,7 @@ class DevicesTable
                             // Delete the records from the database
                             $records->each->delete();
                         })
-                        ->successNotificationTitle('Selected Device(s) successfully'),
+                        ->successNotificationTitle(__('devices.actions.delete_multiple_success', ['label' => __('devices.plural_label')])),
                 ]),
             ]);
     }

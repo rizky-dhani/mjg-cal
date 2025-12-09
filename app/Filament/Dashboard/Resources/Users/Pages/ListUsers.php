@@ -22,7 +22,7 @@ class ListUsers extends ListRecords
     {
         return [
             Action::make('import_users')
-                ->label('Import Users')
+                ->label(__('users.import_users'))
                 ->button()
                 ->modalWidth(Width::Medium)
                 ->form([
@@ -50,7 +50,7 @@ class ListUsers extends ListRecords
                         Excel::import($import, $filePath);
 
                         Notification::make()
-                            ->title('User(s) imported successfully')
+                            ->title(__('users.actions.import_success'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
@@ -67,7 +67,7 @@ class ListUsers extends ListRecords
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('User created successfully'),
+                ->successNotificationTitle(__('users.actions.create_success', ['label' => __('users.label')])),
         ];
     }
 }

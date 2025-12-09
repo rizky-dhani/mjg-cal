@@ -12,6 +12,7 @@ class BrandForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('brands.form.name.label'))
                     ->columnSpanFull()
                     ->required(),
             ]);

@@ -18,7 +18,21 @@ class LogbookResource extends Resource
     protected static ?string $model = Logbook::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
-    protected static string|UnitEnum|null $navigationGroup = 'Inventories';
+
+    public static function getModelLabel(): string
+    {
+        return __('logbooks.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('logbooks.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.Inventories');
+    }
 
     public static function form(Schema $schema): Schema
     {

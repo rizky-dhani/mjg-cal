@@ -16,6 +16,7 @@ class LocationsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('locations.columns.name'))
                     ->searchable(),
             ])
             ->filters([
@@ -23,14 +24,17 @@ class LocationsTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Location updated successfully'),
+                    ->label(__('locations.actions.edit'))
+                    ->successNotificationTitle(__('locations.actions.edit_success', ['label' => __('locations.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Location deleted successfully')
+                    ->label(__('locations.actions.delete'))
+                    ->successNotificationTitle(__('locations.actions.delete_success', ['label' => __('locations.label')]))
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->successNotificationTitle('Selected Location(s) deleted successfully'),
+                        ->label(__('locations.actions.delete'))
+                        ->successNotificationTitle(__('locations.actions.delete_multiple_success', ['label' => __('locations.plural_label')])),
                 ]),
             ]);
     }

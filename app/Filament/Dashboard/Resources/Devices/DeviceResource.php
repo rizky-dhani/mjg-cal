@@ -19,9 +19,25 @@ class DeviceResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTv;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Devices';
+    public static function getModelLabel(): string
+    {
+        return __('devices.label');
+    }
 
-    protected static ?string $navigationLabel = 'Devices';
+    public static function getPluralModelLabel(): string
+    {
+        return __('devices.plural_label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('devices.navigation_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.Devices');
+    }
 
     public static function form(Schema $schema): Schema
     {

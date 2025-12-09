@@ -18,7 +18,21 @@ class CustomerResource extends Resource
     protected static ?string $model = Customer::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::UserCircle;
-    protected static string|UnitEnum|null $navigationGroup = 'User Management';
+
+    public static function getModelLabel(): string
+    {
+        return __('customers.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('customers.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.User Management');
+    }
 
     public static function form(Schema $schema): Schema
     {

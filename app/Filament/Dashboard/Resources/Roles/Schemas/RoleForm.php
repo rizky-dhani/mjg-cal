@@ -13,8 +13,10 @@ class RoleForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('roles.form.name.label'))
                     ->required(),
                 Select::make('guard_name')
+                    ->label(__('roles.form.guard_name.label'))
                     ->options([
                         'web' => 'web'
                     ])
@@ -24,8 +26,8 @@ class RoleForm
                     ->multiple()
                     ->relationship('permissions', 'name')
                     ->preload()
-                    ->label('Permissions')
-                    ->helperText('Select permissions to assign to this role')
+                    ->label(__('roles.formpermissions.label'))
+                    ->helperText(__('roles.formpermissions.helper_text'))
                     ->columnSpanFull(),
             ]);
     }

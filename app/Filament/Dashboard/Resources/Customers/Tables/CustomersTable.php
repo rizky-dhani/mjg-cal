@@ -16,27 +16,33 @@ class CustomersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('customers.columns.name'))
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label(__('customers.columns.slug'))
                     ->searchable(),
                 TextColumn::make('phone_number')
-                    ->label('Phone Number')
+                    ->label(__('customers.columns.phone_number'))
                     ->searchable(),
                 TextColumn::make('address')
+                    ->label(__('customers.columns.address'))
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Customer updated successfully'),
+                    ->label(__('customers.actions.edit'))
+                    ->successNotificationTitle(__('customers.actions.edit_success', ['label' => __('customers.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Customer deleted successfully')
+                    ->label(__('customers.actions.delete'))
+                    ->successNotificationTitle(__('customers.actions.delete_success', ['label' => __('customers.label')]))
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->successNotificationTitle('Selected Customer(s) deleted successfully'),
+                    ->label(__('customers.actions.delete'))
+                    ->successNotificationTitle(__('customers.actions.delete_multiple_success', ['label' => __('customers.plural_label')])),
                 ]),
             ]);
     }

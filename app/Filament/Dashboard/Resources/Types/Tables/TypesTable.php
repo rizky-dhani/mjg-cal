@@ -16,10 +16,13 @@ class TypesTable
         return $table
             ->columns([
                 TextColumn::make('brand.name')
+                    ->label(__('types.columns.brand'))
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label(__('types.columns.name'))
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label(__('types.columns.slug'))
                     ->searchable(),
             ])
             ->filters([
@@ -27,14 +30,17 @@ class TypesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Type updated successfully'),
+                    ->label(__('types.actions.edit'))
+                    ->successNotificationTitle(__('types.actions.edit_success', ['label' => __('types.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Type deleted successfully'),
+                    ->label(__('types.actions.delete'))
+                    ->successNotificationTitle(__('types.actions.delete_success', ['label' => __('types.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->successNotificationTitle('Selected Type(s) deleted successfully'),
+                    ->label(__('types.actions.delete'))
+                    ->successNotificationTitle(__('types.actions.delete_multiple_success', ['label' => __('types.plural_label')])),
                 ]),
             ]);
     }

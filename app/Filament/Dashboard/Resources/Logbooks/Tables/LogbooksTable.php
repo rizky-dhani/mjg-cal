@@ -16,29 +16,32 @@ class LogbooksTable
         return $table
             ->columns([
                 TextColumn::make('log_number')
-                    ->label('Log Number')
+                    ->label(__('logbooks.columns.log_number'))
                     ->searchable(),
                 TextColumn::make('date')
+                    ->label(__('logbooks.columns.date'))
                     ->date('d M Y')
                     ->sortable(),
                 TextColumn::make('inventory.inventory_number')
-                    ->label('Inventory')
+                    ->label(__('logbooks.columns.inventory'))
                     ->tooltip(fn($record) => $record->inventory->deviceName->name)
                     ->sortable(),
                 TextColumn::make('start_date')
-                    ->label('Start Date')
+                    ->label(__('logbooks.columns.start_date'))
                     ->date('d M Y')
                     ->sortable(),
                 TextColumn::make('end_date')
-                    ->label('End Date')
+                    ->label(__('logbooks.columns.end_date'))
                     ->date('d M Y')
                     ->sortable(),
                 TextColumn::make('location.name')
+                    ->label(__('logbooks.columns.location'))
                     ->searchable(),
                 TextColumn::make('pic.name')
-                    ->label('PIC')
+                    ->label(__('logbooks.columns.pic'))
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label(__('logbooks.columns.status'))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Available' => 'success',
@@ -51,14 +54,17 @@ class LogbooksTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->successNotificationTitle('Log updated successfully'),
+                    ->label(__('logbooks.actions.edit'))
+                    ->successNotificationTitle(__('logbooks.actions.edit_success', ['label' => __('logbooks.label')])),
                 DeleteAction::make()
-                    ->successNotificationTitle('Log deleted successfully'),
+                    ->label(__('logbooks.actions.delete'))
+                    ->successNotificationTitle(__('logbooks.actions.delete_success', ['label' => __('logbooks.label')])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->successNotificationTitle('Selected Log(s) deleted successfully'),
+                    ->label(__('logbooks.actions.delete'))
+                    ->successNotificationTitle(__('logbooks.actions.delete_multiple_success', ['label' => __('logbooks.plural_label')])),
                 ]),
             ]);
     }
