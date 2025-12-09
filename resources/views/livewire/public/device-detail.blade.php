@@ -1,16 +1,32 @@
 <div class="container mx-auto px-4 py-8 flex items-center justify-center min-h-screen">
     <div class="bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-4xl">
         <div class="flex flex-col md:flex-row">
-            <!-- Left Column - Barcode Image -->
+            <!-- Left Column - QR Code with Logo -->
             <div class="md:w-1/2 p-6 sm:p-8">
                 <div class="bg-white rounded-lg shadow p-6 h-full flex flex-col">
                     <div class="flex flex-col items-center justify-center flex-1">
+                        <!-- Rena Logo -->
+                        <div class="mb-4">
+                            <img src="{{ asset('assets/images/logos/Rena-Logo.webp') }}"
+                                 alt="Rena Logo"
+                                 class="mx-auto max-w-[150px] sm:max-w-[180px] md:max-w-[200px] h-auto object-contain">
+                        </div>
+
+                        <!-- QR Code -->
                         @if($device->deviceId)
-                            <!-- This is a placeholder - you might want to use a barcode generation library -->
-                            <img src="{{ asset('storage/'.$device->barcode) }}" alt="Device Barcode" class="mx-auto max-w-full h-auto rounded border border-gray-200 p-2">
+                            @if($qrCodeExists)
+                                @php
+                                    $qrCodePath = 'devices/qrcodes/' . $device->deviceId . '.png';
+                                @endphp
+                                <img src="{{ asset('storage/' . $qrCodePath) }}" alt="Device QR Code" class="mx-auto max-w-full h-auto rounded border border-gray-200 p-2">
+                            @else
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center w-full">
+                                    <p class="text-sm text-gray-400 mt-2">QR Code not available</p>
+                                </div>
+                            @endif
                         @else
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center w-full">
-                                <p class="text-sm text-gray-400 mt-2">No barcode available</p>
+                                <p class="text-sm text-gray-400 mt-2">No device ID available</p>
                             </div>
                         @endif
                     </div>

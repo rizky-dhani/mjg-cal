@@ -3,6 +3,7 @@
 namespace App\Livewire\Public;
 
 use App\Models\Device;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -10,11 +11,18 @@ use Livewire\Component;
 class DeviceDetail extends Component
 {
     public Device $device;
+    public $qrCodeExists = false;
 
     public function mount($deviceId)
     {
         // $this->device = Device::with(['deviceName', 'brand', 'type', 'pic', 'customer'])->findOrFail($deviceId);
         $this->device = Device::where('deviceId', $deviceId)->firstOrFail();
+
+        // Check if QR code exists
+        if ($this->device->deviceId) {
+            $qrCodePath = 'devices/qrcodes/' . $this->device->deviceId . '.png';
+            $this->qrCodeExists = Storage::disk('public')->exists($qrCodePath);
+        }
     }
 
     #[Title('Device Detail')]
@@ -23,6 +31,7 @@ class DeviceDetail extends Component
     {
         return view('livewire.public.device-detail', [
             'device' => $this->device,
+            'qrCodeExists' => $this->qrCodeExists,
         ]);
     }
 }
