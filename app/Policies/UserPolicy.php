@@ -11,7 +11,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view-any-user');
+        return $user->can('view-any-user') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -19,7 +19,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->can('view-user');
+        return $user->can('view-user') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -27,7 +27,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create-user');
+        return $user->can('create-user') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -35,7 +35,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->can('update-user');
+        return $user->can('update-user') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -43,7 +43,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can('delete-user');
+        return $user->can('delete-user') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -51,6 +51,6 @@ class UserPolicy
      */
     public function resetPassword(User $user, User $model): bool
     {
-        return $user->can('reset-password-users');
+        return $user->can('reset-password-users') || $user->hasRole('Super Admin');
     }
 }
