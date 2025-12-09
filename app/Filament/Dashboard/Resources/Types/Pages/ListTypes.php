@@ -15,6 +15,7 @@ class ListTypes extends ListRecords
     {
         return [
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('Type created successfully'),
         ];

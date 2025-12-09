@@ -15,6 +15,7 @@ class ListDeviceNames extends ListRecords
     {
         return [
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('Device Name created successfully'),
         ];

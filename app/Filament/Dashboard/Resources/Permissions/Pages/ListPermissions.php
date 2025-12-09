@@ -44,6 +44,7 @@ class ListPermissions extends ListRecords
                 ->modalDescription('This will automatically generate permissions based on your application models and controllers. Do you want to continue?')
                 ->modalSubmitActionLabel('Generate'),
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('Permission created successfully'),
         ];

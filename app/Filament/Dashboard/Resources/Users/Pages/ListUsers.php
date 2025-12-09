@@ -65,6 +65,7 @@ class ListUsers extends ListRecords
                 ->modalDescription('Upload an Excel file to import users.')
                 ->modalSubmitActionLabel('Import'),
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('User created successfully'),
         ];

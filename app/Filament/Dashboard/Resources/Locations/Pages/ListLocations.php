@@ -15,6 +15,7 @@ class ListLocations extends ListRecords
     {
         return [
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('Location created successfully'),
         ];

@@ -15,6 +15,7 @@ class ListRoles extends ListRecords
     {
         return [
             CreateAction::make()
+                ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
                 ->successNotificationTitle('Role created successfully'),
         ];
