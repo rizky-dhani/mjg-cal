@@ -50,7 +50,7 @@ class ListUsers extends ListRecords
                         Excel::import($import, $filePath);
 
                         Notification::make()
-                            ->title(__('users.actions.import_success'))
+                            ->title(__('users.actions.import_success', ['label' => __('users.label')]))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
