@@ -45,7 +45,7 @@ class GenerateMultipleQRCodesJob implements ShouldQueue
 
                 // Generate unique device number with template MJG-CAL- followed by 6 digits zero-padded
                 $sequenceNumber = $index + 1;
-                $deviceNumber = 'MJG-CAL-' . str_pad($sequenceNumber, 6, '0', STR_PAD_LEFT);
+                $deviceNumber = 'RENA-' . str_pad($sequenceNumber, 6, '0', STR_PAD_LEFT);
 
                 // Ensure uniqueness by checking against existing device numbers in the database
                 $originalDeviceNumber = $deviceNumber;
