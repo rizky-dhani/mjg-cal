@@ -8,7 +8,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class DevicesWidget extends StatsOverviewWidget
 {
-    protected ?string $heading = 'QR Devices';
+    protected function getHeading(): ?string
+    {
+        return __('widgets.qr.title');
+    }
+
     protected ?string $pollingInterval = null;
     protected function getStats(): array
     {
@@ -48,13 +52,13 @@ class DevicesWidget extends StatsOverviewWidget
         $partiallyFilledDevices = $totalDevices - $filledDevices - $emptyDevices;
 
         return [
-            Stat::make('Total Devices', $totalDevices)
-                ->description('Device(s)')
+            Stat::make(__('widgets.qr.total'), $totalDevices)
+                ->description(__('widgets.qr.unit'))
                 ->color('primary')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index')),
 
-            Stat::make('Filled Devices', $filledDevices)
-                ->description('Device(s)')
+            Stat::make(__('widgets.qr.filled'), $filledDevices)
+                ->description(__('widgets.qr.unit'))
                 ->descriptionIcon('heroicon-m-check-circle')
                 ->color('success')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
@@ -68,8 +72,8 @@ class DevicesWidget extends StatsOverviewWidget
                     ],
                 ])),
 
-            Stat::make('Partially Filled Devices', $partiallyFilledDevices)
-                ->description('Device(s)')
+            Stat::make(__('widgets.qr.partial'), $partiallyFilledDevices)
+                ->description(__('widgets.qr.unit'))
                 ->descriptionIcon('heroicon-m-minus-circle')
                 ->color('warning')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [
@@ -80,8 +84,8 @@ class DevicesWidget extends StatsOverviewWidget
                     ],
                 ])),
 
-            Stat::make('Empty Devices', $emptyDevices)
-                ->description('Device(s)')
+            Stat::make(__('widgets.qr.empty'), $emptyDevices)
+                ->description(__('widgets.qr.unit'))
                 ->descriptionIcon('heroicon-m-x-circle')
                 ->color('danger')
                 ->url(\App\Filament\Dashboard\Resources\Devices\DeviceResource::getUrl('index', [

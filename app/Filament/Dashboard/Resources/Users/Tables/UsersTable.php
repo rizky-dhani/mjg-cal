@@ -50,6 +50,7 @@ class UsersTable
                     })
                     ->successNotificationTitle(__('users.actions.reset_password_success')),
                 EditAction::make()
+                    ->color('info')
                     ->label(__('users.actions.edit'))
                     ->successNotificationTitle(__('users.actions.edit_success', ['label' => __('users.label')])),
                 DeleteAction::make()

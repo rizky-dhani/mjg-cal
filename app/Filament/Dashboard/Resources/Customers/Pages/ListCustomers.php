@@ -17,7 +17,7 @@ class ListCustomers extends ListRecords
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('Customer created successfully'),
+                ->successNotificationTitle(__('customers.actions.create_success', ['label' => __('customers.label')])),
         ];
     }
 }

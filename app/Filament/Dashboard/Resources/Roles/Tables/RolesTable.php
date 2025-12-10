@@ -30,6 +30,7 @@ class RolesTable
                     ->label(__('roles.actions.view'))
                     ->color('dark'),
                 EditAction::make()
+                    ->color('info')
                     ->label(__('roles.actions.edit'))
                     ->successNotificationTitle(__('roles.actions.edit_success', ['label' => __('roles.label')])),
                 DeleteAction::make()

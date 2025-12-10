@@ -54,6 +54,7 @@ class LogbooksTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('logbooks.actions.edit'))
                     ->successNotificationTitle(__('logbooks.actions.edit_success', ['label' => __('logbooks.label')])),
                 DeleteAction::make()

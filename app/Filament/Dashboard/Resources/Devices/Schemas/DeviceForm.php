@@ -22,7 +22,7 @@ class DeviceForm
                     ->relationship('deviceName', 'name')
                     ->preload()
                     ->searchable()
-                    ->createOptionModalHeading(__('devices.form.create_device_name_modal_heading'))
+                    ->createOptionModalHeading(__('devices.form.device_name_id.modal_heading'))
                     ->createOptionForm([
                         TextInput::make('name')
                             ->label(__('devices.form.name.label'))
@@ -41,7 +41,7 @@ class DeviceForm
                             ->relationship('brand', 'name')
                             ->preload()
                             ->searchable()
-                            ->createOptionModalHeading(__('devices.form.create_brand_modal_heading'))
+                            ->createOptionModalHeading(__('devices.form.brand_id.modal_heading'))
                             ->createOptionForm([
                                 TextInput::make('name')
                                     ->label(__('devices.form.name.label'))
@@ -50,11 +50,11 @@ class DeviceForm
                             ])
                             ->default(null),
                         Select::make('type_id')
-                            ->label(__('devices.formtype_id.label'))
+                            ->label(__('devices.form.type_id.label'))
                             ->relationship('type', 'name')
                             ->preload()
                             ->searchable()
-                            ->createOptionModalHeading(__('devices.form.create_type_modal_heading'))
+                            ->createOptionModalHeading(__('devices.form.type_id.modal_heading'))
                             ->createOptionForm([
                                 Select::make('brand_id')
                                     ->label(__('devices.form.brand.label'))
@@ -73,7 +73,7 @@ class DeviceForm
                     ->relationship('location', 'name')
                     ->preload()
                     ->searchable()
-                    ->createOptionModalHeading(__('devices.form.create_location_modal_heading'))
+                    ->createOptionModalHeading(__('devices.form.location_id.modal_heading'))
                     ->createOptionForm([
                         TextInput::make('name')
                             ->label(__('devices.form.name.label'))
@@ -85,7 +85,7 @@ class DeviceForm
                     ->relationship('customer', 'name')
                     ->preload()
                     ->searchable()
-                    ->createOptionModalHeading(__('devices.form.create_customer_modal_heading'))
+                    ->createOptionModalHeading(__('devices.form.customer_id.modal_heading'))
                     ->createOptionForm([
                         TextInput::make('name')
                             ->label(__('devices.form.name.label'))

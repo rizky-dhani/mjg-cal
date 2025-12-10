@@ -16,26 +16,26 @@ class ListDevices extends ListRecords
     {
         return [
             Action::make('generate_empty_qr')
-                ->label('Generate Empty QR Codes')
+                ->label(__('devices.actions.generate_empty_qr'))
                 ->icon('heroicon-o-qr-code')
                 ->color('success')
                 ->form([
                     \Filament\Forms\Components\TextInput::make('number_of_qr')
-                        ->label('Number of Empty QR Codes')
+                        ->label(__('devices.generate.qr_number'))
                         ->numeric()
                         ->minValue(1)
                         ->maxValue(1000)
                         ->default(1)
                         ->required()
-                        ->helperText('Enter how many empty QR codes to generate'),
+                        ->helperText(__('devices.generate.qr_number_helper')),
                 ])
                 ->action(function (array $data) {
                     $numberOfQr = (int) $data['number_of_qr'];
 
                     if ($numberOfQr <= 0) {
                         \Filament\Notifications\Notification::make()
-                            ->title('Invalid number of devices')
-                            ->body('Please enter a valid number of devices.')
+                            ->title(__('devices.generate.invalid_number'))
+                            ->body(__('devices.generate.invalid_number_body'))
                             ->danger()
                             ->send();
 
@@ -56,7 +56,7 @@ class ListDevices extends ListRecords
 
                     // Show success notification
                     \Filament\Notifications\Notification::make()
-                        ->title('QR Code Generated Successfully')
+                        ->title(__('devices.generate.generate_success'))
                         ->success();
                 }),
         ];

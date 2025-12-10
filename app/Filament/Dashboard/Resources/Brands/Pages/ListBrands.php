@@ -17,7 +17,7 @@ class ListBrands extends ListRecords
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('Brand created successfully'),
+                ->successNotificationTitle(__('brands.actions.create_success', ['label' => __('brands.label')])),
         ];
     }
 }

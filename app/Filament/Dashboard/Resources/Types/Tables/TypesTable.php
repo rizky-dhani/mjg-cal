@@ -30,6 +30,7 @@ class TypesTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('types.actions.edit'))
                     ->successNotificationTitle(__('types.actions.edit_success', ['label' => __('types.label')])),
                 DeleteAction::make()

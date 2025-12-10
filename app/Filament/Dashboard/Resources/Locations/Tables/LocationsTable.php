@@ -24,6 +24,7 @@ class LocationsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('locations.actions.edit'))
                     ->successNotificationTitle(__('locations.actions.edit_success', ['label' => __('locations.label')])),
                 DeleteAction::make()

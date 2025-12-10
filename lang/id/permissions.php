@@ -18,9 +18,19 @@ return [
         'view' => 'Lihat',
         'create' => 'Buat',
         'cancel' => 'Batal',
+        'create_success' => ':label berhasil dibuat',
         'edit_success' => ':label berhasil diperbarui',
         'delete_success' => ':label berhasil dihapus',
         'delete_multiple_success' => ':label terpilih berhasil dihapus',
+    ],
+
+    'generate' => [
+        'title' => 'Buat Izin',
+        'desc' => 'Sistem akan membuat izin berdasarkan model yang tersedia. Apakah anda yakin?',
+        'count_success' => ' izin berhasil dibuat',
+        'empty' => 'Tidak ada izin yang dibuat',
+        'success' => 'Izin berhasil dibuat',
+        'button_label' => 'Buat'
     ],
 
     'form' => [

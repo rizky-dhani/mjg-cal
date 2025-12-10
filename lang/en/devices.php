@@ -44,11 +44,19 @@ return [
         'generate_empty_qr' => 'Generate Empty QR Codes',
     ],
 
+    'generate' => [
+        'qr_number' => 'Number of Empty QR Codes',
+        'qr_number_helper' => 'Enter how many empty QR codes to generate',
+        'invalid_number' => 'Invalid number of devices',
+        'invalid_number_body' => 'Please enter a valid number of devices',
+        'generate_success' => 'QR Code successfully generated'
+    ],
+
     'form' => [
         'device_name_id' => [
             'label' => 'Device Name',
             'placeholder' => 'Select device name',
-            'create_device_name_modal_heading' => 'Create Device Name',
+            'modal_heading' => 'Create Device Name',
         ],
         'device_number' => [
             'label' => 'Device Number',
@@ -59,22 +67,22 @@ return [
         'location_id' => [
             'label' => 'Location',
             'placeholder' => 'Select location',
-            'create_location_modal_heading' => 'Create Location',
+            'modal_heading' => 'Create Location',
         ],
         'type_id' => [
             'label' => 'Type',
             'placeholder' => 'Select type',
-            'create_type_modal_heading' => 'Create Type',
+            'modal_heading' => 'Create Type',
         ],
         'brand_id' => [
             'label' => 'Brand',
             'placeholder' => 'Select brand',
-            'create_brand_modal_heading' => 'Create Brand',
+            'modal_heading' => 'Create Brand',
         ],
         'customer_id' => [
             'label' => 'Customer',
             'placeholder' => 'Select customer',
-            'create_customer_modal_heading' => 'Create Customer',
+            'modal_heading' => 'Create Customer',
         ],
         'admin_id' => [
             'label' => 'Admin',
@@ -86,10 +94,6 @@ return [
         ],
         'calibration_date' => [
             'label' => 'Calibration Date',
-        ],
-        'status' => [
-            'label' => 'Status',
-            'placeholder' => 'Select status',
         ],
         'description' => [
             'label' => 'Description',
@@ -122,9 +126,12 @@ return [
                 'not_fit_for_use' => 'Not Fit For Use',
             ],
         ],
-        'status_options' => [
-            'available' => 'Available',
-            'unavailable' => 'Unavailable',
+        'status' => [
+            'label' => 'Status',
+            'options' => [
+                'available' => 'Available',
+                'unavailable' => 'Unavailable',
+            ],
         ],
         'cert_number' => [
             'label' => 'Certificate Number',
@@ -141,13 +148,5 @@ return [
         'partially_filled' => [
             'label' => 'Partially Filled',
         ],
-    ],
-
-    'status' => [
-        'available' => 'Available',
-        'in_use' => 'In Use',
-        'maintenance' => 'Maintenance',
-        'out_of_order' => 'Out of Order',
-        'retired' => 'Retired',
     ],
 ];

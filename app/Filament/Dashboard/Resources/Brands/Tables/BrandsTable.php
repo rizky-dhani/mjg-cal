@@ -27,6 +27,7 @@ class BrandsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('brands.actions.edit'))
                     ->successNotificationTitle(__('brands.actions.edit_success', ['label' => __('brands.label')])),
                 DeleteAction::make()

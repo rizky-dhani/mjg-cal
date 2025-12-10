@@ -32,6 +32,7 @@ class CustomersTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('customers.actions.edit'))
                     ->successNotificationTitle(__('customers.actions.edit_success', ['label' => __('customers.label')])),
                 DeleteAction::make()

@@ -17,7 +17,7 @@ class ListInventories extends ListRecords
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('Inventories created successfully'),
+                ->successNotificationTitle(__('inventories.actions.create_success', ['label' => __('inventories.label')])),
         ];
     }
 }

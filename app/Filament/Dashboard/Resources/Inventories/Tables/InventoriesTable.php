@@ -63,6 +63,7 @@ class InventoriesTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('inventories.actions.edit'))
                     ->successNotificationTitle(__('inventories.actions.edit_success', ['label' => __('inventories.label')])),
                 DeleteAction::make()

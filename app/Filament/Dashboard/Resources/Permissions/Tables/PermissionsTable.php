@@ -27,6 +27,7 @@ class PermissionsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('permissions.actions.edit'))
                     ->successNotificationTitle(__('permissions.actions.edit_success', ['label' => __('permissions.label')])),
                 DeleteAction::make()

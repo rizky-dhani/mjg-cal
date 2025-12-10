@@ -74,14 +74,16 @@ class DevicesTable
                 TextColumn::make('result')
                     ->label(__('devices.columns.result'))
                     ->searchable()
+                    ->formatStateUsing(fn(string $state) => __('devices.form.result.options.'.strtolower(str_replace(' ', '_', $state))))
                     ->getStateUsing(fn ($record) => $record->result ?? 'N/A'),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Tersedia' => 'success',
-                        'Tidak Tersedia' => 'danger',
+                    ->color(fn (string $state): string => match (strtolower($state)) {
+                        'available' => 'success',
+                        'unavailable' => 'danger',
                         default => 'gray',
                     })
+                    ->formatStateUsing(fn(string $state) => __('devices.form.status.options.'.strtolower($state)))
                     ->label(__('devices.columns.status'))
                     ->getStateUsing(fn ($record) => $record->status ?? 'N/A'),
                 TextColumn::make('admin_id')
@@ -163,6 +165,7 @@ class DevicesTable
                     ->openUrlInNewTab()
                     ->url(fn ($record) => route('devices.publicDetail', $record->deviceId)),
                 EditAction::make()
+                    ->color('info')
                     ->label(__('devices.actions.edit'))
                     ->color('info')
                     ->mutateFormDataUsing(function (array $data): array {

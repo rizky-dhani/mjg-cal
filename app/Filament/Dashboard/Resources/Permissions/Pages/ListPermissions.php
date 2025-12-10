@@ -20,7 +20,7 @@ class ListPermissions extends ListRecords
     {
         return [
             Action::make('generate_permissions')
-                ->label('Generate Permissions')
+                ->label(__('permissions.generate.title'))
                 ->button()
                 ->color('primary')
                 ->action(function (): void {
@@ -29,24 +29,24 @@ class ListPermissions extends ListRecords
 
                     if (count($generatedPermissions) > 0) {
                         Notification::make()
-                            ->title(fn() => count($generatedPermissions)." permissions generated sucessfully")
+                            ->title(fn() => count($generatedPermissions).__('permissions.generate.count_success'))
                             ->success()
                             ->send();
                     } else {
                         Notification::make()
-                            ->title('No permission(s) generated')
+                            ->title(__('permissions.generate.empty'))
                             ->danger()
                             ->send();
                     }
                 })
                 ->requiresConfirmation()
-                ->modalHeading('Generate Permissions')
-                ->modalDescription('This will automatically generate permissions based on your application models and controllers. Do you want to continue?')
-                ->modalSubmitActionLabel('Generate'),
+                ->modalHeading(__('permissions.generate.title'))
+                ->modalDescription(__('permissions.generate.desc'))
+                ->modalSubmitActionLabel(__('permissions.generate.button_label')),
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('Permission created successfully'),
+                ->successNotificationTitle(__('permissions.generate.success')),
         ];
     }
 }

@@ -41,14 +41,22 @@ return [
         'edit_success' => ':label berhasil diperbarui',
         'delete_success' => ':label berhasil dihapus',
         'delete_multiple_success' => ':label terpilih berhasil dihapus',
-        'generate_empty_qr' => 'Hasilkan Kode QR Kosong',
+        'generate_empty_qr' => 'Buat Kode QR Kosong',
+    ],
+
+    'generate' => [
+        'qr_number' => 'Jumlah QR kosong',
+        'qr_number_helper' => 'Masukkan jumlah QR kosong yang akan dibuat',
+        'invalid_number' => 'Jumlah yang dimasukkan tidak valid',
+        'invalid_number_body' => 'Masukkan jumlah yang valid',
+        'generate_success' => 'Kode QR berhasil dibuat'
     ],
 
     'form' => [
         'device_name_id' => [
             'label' => 'Nama Perangkat',
             'placeholder' => 'Pilih nama perangkat',
-            'create_device_name_modal_heading' => 'Buat Nama Perangkat',
+            'modal_heading' => 'Buat Nama Perangkat',
         ],
         'device_number' => [
             'label' => 'Nomor Perangkat',
@@ -59,22 +67,22 @@ return [
         'location_id' => [
             'label' => 'Lokasi',
             'placeholder' => 'Pilih lokasi',
-            'create_location_modal_heading' => 'Buat Lokasi',
+            'modal_heading' => 'Buat Lokasi',
         ],
         'type_id' => [
             'label' => 'Tipe',
             'placeholder' => 'Pilih tipe',
-            'create_type_modal_heading' => 'Buat Tipe',
+            'modal_heading' => 'Buat Tipe',
         ],
         'brand_id' => [
             'label' => 'Merek',
             'placeholder' => 'Pilih merek',
-            'create_brand_modal_heading' => 'Buat Merek',
+            'modal_heading' => 'Buat Merek',
         ],
         'customer_id' => [
             'label' => 'Pelanggan',
             'placeholder' => 'Pilih pelanggan',
-            'create_customer_modal_heading' => 'Buat Pelanggan',
+            'modal_heading' => 'Buat Pelanggan',
         ],
         'admin_id' => [
             'label' => 'Admin',
@@ -86,10 +94,6 @@ return [
         ],
         'calibration_date' => [
             'label' => 'Tanggal Kalibrasi',
-        ],
-        'status' => [
-            'label' => 'Status',
-            'placeholder' => 'Pilih status',
         ],
         'description' => [
             'label' => 'Deskripsi',
@@ -118,13 +122,15 @@ return [
         'result' => [
             'label' => 'Hasil',
             'options' => [
-                'fit_for_use' => 'Sesuai Penggunaan',
-                'not_fit_for_use' => 'Tidak Sesuai Penggunaan',
+                'fit_for_use' => 'Laik Pakai',
+                'not_fit_for_use' => 'Tidak Laik Pakai',
             ],
         ],
-        'status_options' => [
-            'available' => 'Tersedia',
-            'unavailable' => 'Tidak Tersedia',
+        'status' => [
+            'options' => [
+                'available' => 'Tersedia',
+                'unavailable' => 'Tidak Tersedia',
+            ],
         ],
         'cert_number' => [
             'label' => 'Nomor Sertifikat',
@@ -141,13 +147,5 @@ return [
         'partially_filled' => [
             'label' => 'Terisi Sebagian',
         ],
-    ],
-
-    'status' => [
-        'available' => 'Tersedia',
-        'in_use' => 'Digunakan',
-        'maintenance' => 'Perawatan',
-        'out_of_order' => 'Rusak',
-        'retired' => 'Tidak Digunakan',
     ],
 ];

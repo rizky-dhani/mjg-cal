@@ -26,7 +26,7 @@ return [
         'view' => 'Lihat',
         'create' => 'Buat',
         'cancel' => 'Batal',
-        'create_success' => ':label berhasil diperbarui',
+        'create_success' => ':label berhasil dibuat',
         'edit_success' => ':label berhasil diperbarui',
         'delete_success' => ':label berhasil dihapus',
         'delete_multiple_success' => ':label terpilih berhasil dihapus',

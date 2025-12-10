@@ -17,7 +17,7 @@ class ListLogbooks extends ListRecords
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
-                ->successNotificationTitle('Log created successfully'),
+                ->successNotificationTitle(__('logbooks.actions.create_success', ['label' => __('logbooks.label')])),
         ];
     }
 }

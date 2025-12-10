@@ -20,6 +20,7 @@ return [
         'view' => 'View',
         'create' => 'Create',
         'cancel' => 'Cancel',
+        'create_success' => ':label successfully created',
         'edit_success' => ':label successfully updated',
         'delete_success' => ':label successfully deleted',
         'delete_multiple_success' => 'Selected :label successfully deleted',

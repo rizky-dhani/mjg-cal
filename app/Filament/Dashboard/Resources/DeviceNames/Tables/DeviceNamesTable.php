@@ -27,6 +27,7 @@ class DeviceNamesTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->color('info')
                     ->label(__('devicenames.actions.edit'))
                     ->successNotificationTitle(__('devicenames.actions.edit_success', ['label' => __('devicenames.label')])),
                 DeleteAction::make()

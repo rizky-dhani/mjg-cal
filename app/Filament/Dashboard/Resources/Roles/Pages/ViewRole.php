@@ -24,6 +24,7 @@ class ViewRole extends ViewRecord
     {
         return [
             EditAction::make()
+                ->color('info')
                 ->successNotificationTitle('Role updated successfully'),
             Action::make('assign_permissions')
                 ->form([
