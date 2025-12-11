@@ -32,7 +32,12 @@ return [
         'delete_multiple_success' => 'Selected :label successfully deleted',
         'reset_password' => 'Reset Password',
         'reset_password_success' => 'Password has been reset successfully',
-        'import_success' => ':plural_label successfully imported'
+        'import_success' => ':plural_label successfully imported',
+        'import_failed' => 'Import failed',
+        'import_helper' => 'Upload an Excel file (.xlsx, .csv) containing users to import. The file should have columns: name, email (password will be automatically generated)',
+        'import_file_not_found' => 'File does not exist',
+        'import_modal_desc' => 'Upload an Excel file to import users',
+        'import_modal_submit' => 'Import',
     ],
 
     'form' => [
@@ -55,5 +60,8 @@ return [
         'roles' => [
             'label' => 'Roles',
         ],
+        'import' => [
+            'label'=> 'Excel file',
+        ]
     ],
 ];

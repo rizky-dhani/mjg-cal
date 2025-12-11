@@ -24,17 +24,17 @@ class ListUsers extends ListRecords
             Action::make('import_users')
                 ->label(__('users.import_users'))
                 ->button()
-                ->modalWidth(Width::Medium)
+                ->modalWidth(Width::Large)
                 ->form([
                     FileUpload::make('import_file')
-                        ->label('Excel File')
+                        ->label(__('users.form.import.label'))
                         ->required()
                         ->acceptedFileTypes(['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv', 'application/vnd.ms-excel'])
                         ->maxSize(10240) // 10MB
                         ->disk('local')
                         ->directory('imports')
                         ->visibility('private')
-                        ->helperText('Upload an Excel file (.xlsx, .csv) containing users to import. The file should have columns: name, email (password will be automatically generated)')
+                        ->helperText(__('users.actions.import_helper'))
                         ->columnSpanFull(),
                 ])
                 ->action(function (array $data): void {
@@ -44,26 +44,26 @@ class ListUsers extends ListRecords
 
                         // Check if the file exists in storage
                         if (!\Storage::exists($filePath)) {
-                            throw new \Exception("File does not exist: {$filePath}");
+                            throw new \Exception(__('users.actions.import_file_not_found').': '. $filePath);
                         }
 
                         Excel::import($import, $filePath);
 
                         Notification::make()
-                            ->title(__('users.actions.import_success', ['label' => __('users.label')]))
+                            ->title(__('users.actions.import_success', ['plural_label' => __('users.label')]))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
                         Notification::make()
-                            ->title('Import failed')
+                            ->title(__('users.actions.import_failed'))
                             ->body($e->getMessage())
                             ->danger()
                             ->send();
                     }
                 })
-                ->modalHeading('Import Users')
-                ->modalDescription('Upload an Excel file to import users.')
-                ->modalSubmitActionLabel('Import'),
+                ->modalHeading(__('users.import_users'))
+                ->modalDescription(__('users.actions.import_modal_desc'))
+                ->modalSubmitActionLabel(__('users.actions.import_modal_submit')),
             CreateAction::make()
                 ->color('success')
                 ->modalWidth(Width::SevenExtraLarge)
