@@ -40,6 +40,7 @@ class DashboardPanelProvider extends PanelProvider
             ->brandName('Rena')
             ->brandLogo(fn() => asset('assets/images/logos/Rena-Logo.webp'))
             ->brandLogoHeight('4em')
+            ->favicon(fn() => asset('assets/images/logos/Rena-Logo.webp'))
             ->profile(EditProfile::class)
             ->maxContentWidth(Width::Full)
             ->colors([
