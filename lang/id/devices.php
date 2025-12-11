@@ -52,6 +52,12 @@ return [
         'generate_success' => 'Kode QR berhasil dibuat'
     ],
 
+    'detail' => [
+        'qr_not_available' => 'QR Code tidak tersedia',
+        'no_device_id' => 'Tidak ada ID Perangkat tersedia',
+        'cal_info' => 'Informasi Kalibrasi'
+    ],
+
     'form' => [
         'device_name_id' => [
             'label' => 'Nama Perangkat',
@@ -95,6 +101,9 @@ return [
         'calibration_date' => [
             'label' => 'Tanggal Kalibrasi',
         ],
+        'next_calibration_date' => [
+            'label' => 'Tanggal Kalibrasi Selanjutnya',
+        ],
         'description' => [
             'label' => 'Deskripsi',
         ],
@@ -134,6 +143,10 @@ return [
         ],
         'cert_number' => [
             'label' => 'Nomor Sertifikat',
+        ],
+        'notes' => [
+            'label' => 'Catatan',
+            'empty' => 'Tidak ada catatan tersedia'
         ],
     ],
     

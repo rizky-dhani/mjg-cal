@@ -9,24 +9,24 @@
                         <div class="mb-4">
                             <img src="{{ asset('assets/images/logos/Rena-Logo.webp') }}"
                                  alt="Rena Logo"
-                                 class="mx-auto max-w-[150px] sm:max-w-[180px] md:max-w-[250px] h-auto object-contain">
+                                 class="mx-auto max-w-[150px] sm:max-w-[180px] md:max-w-[300px] h-auto object-contain">
                         </div>
 
                         <!-- QR Code -->
                         @if($device->deviceId)
                             @if($qrCodeExists)
                                 @php
-                                    $qrCodePath = 'devices/qrcodes/' . $device->deviceId . '.png';
+        $qrCodePath = 'qrcodes/' . $device->deviceId . '.png';
                                 @endphp
                                 <img src="{{ asset('storage/' . $qrCodePath) }}" alt="Device QR Code" class="mx-auto max-w-full h-auto rounded border border-gray-200 p-2">
                             @else
                                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center w-full">
-                                    <p class="text-sm text-gray-400 mt-2">QR Code not available</p>
+                                    <p class="text-sm text-gray-400 mt-2">{{ __('devices.detail.qr_not_available') }}</p>
                                 </div>
                             @endif
                         @else
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center w-full">
-                                <p class="text-sm text-gray-400 mt-2">No device ID available</p>
+                                <p class="text-sm text-gray-400 mt-2">{{ __('devices.detail.no_device_id') }}</p>
                             </div>
                         @endif
                     </div>
@@ -51,69 +51,69 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Device Number</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.device_number.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->device_number ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Brand</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.brand_id.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->brand->name ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Type/Model</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.type_id.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->type->name ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Serial Number</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.serial_number.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->serial_number ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Location</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.location_id.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->location->name ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Procurement Year</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.procurement_year.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->procurement_year ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Person In Charge</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.user_id.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->pic->name ?? 'N/A' }}</p>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Customer</h3>
+                        <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.customer_id.label') }}</h3>
                         <p class="mt-1 text-gray-900">{{ $device->customer->name ?? 'N/A' }}</p>
                     </div>
                 </div>
 
                 <div class="mt-8 pt-6 border-t border-gray-200">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Calibration Information</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('devices.detail.cal_info') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="flex flex-col">
-                            <h4 class="text-sm font-medium text-gray-500">Calibrated Date</h4>
+                            <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.calibration_date.label') }}</h4>
                             <p class="mt-1 text-gray-900">{{ $device->calibration_date ? \Carbon\Carbon::parse($device->calibration_date)->format('d M Y') : 'N/A' }}</p>
                         </div>
 
                         <div class="flex flex-col">
-                            <h4 class="text-sm font-medium text-gray-500">Next Calibration Date</h4>
+                            <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.next_calibration_date.label') }}</h4>
                             <p class="mt-1 text-gray-900">{{ $device->next_calibration_date ? \Carbon\Carbon::parse($device->next_calibration_date)->format('d M Y') : 'N/A' }}</p>
                         </div>
 
                         <div class="flex flex-col">
-                            <h4 class="text-sm font-medium text-gray-500">Certificate Number</h4>
+                            <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.cert_number.label') }}</h4>
                             <p class="mt-1 text-gray-900">{{ $device->cert_number ?? 'N/A' }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6 pt-4 border-t border-gray-200">
-                    <h3 class="text-sm font-medium text-gray-500">Notes</h3>
-                    <p class="mt-1 text-gray-900">{{ $device->notes ?? 'No notes available' }}</p>
+                    <h3 class="text-sm font-medium text-gray-500">{{ __('devices.form.notes.label') }}</h3>
+                    <p class="mt-1 text-gray-900">{{ $device->notes ?? __('devices.form.notes.empty') }}</p>
                 </div>
             </div> <!-- Close device details card -->
         </div> <!-- Close right column -->

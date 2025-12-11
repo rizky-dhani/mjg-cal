@@ -52,6 +52,12 @@ return [
         'generate_success' => 'QR Code successfully generated'
     ],
 
+    'detail' => [
+        'qr_not_available' => 'QR Code not available',
+        'no_device_id' => 'No Device ID available',
+        'cal_info' => 'Calibration Information'
+    ],
+
     'form' => [
         'device_name_id' => [
             'label' => 'Device Name',
@@ -95,6 +101,9 @@ return [
         'calibration_date' => [
             'label' => 'Calibration Date',
         ],
+        'next_calibration_date' => [
+            'label' => 'Next Calibration Date',
+        ],
         'description' => [
             'label' => 'Description',
         ],
@@ -135,6 +144,10 @@ return [
         ],
         'cert_number' => [
             'label' => 'Certificate Number',
+        ],
+        'notes' => [
+            'label' => 'Catatan',
+            'empty' => 'No notes available'
         ],
     ],
     

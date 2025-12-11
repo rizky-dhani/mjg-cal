@@ -20,7 +20,7 @@ class DeviceDetail extends Component
 
         // Check if QR code exists
         if ($this->device->deviceId) {
-            $qrCodePath = 'devices/qrcodes/' . $this->device->deviceId . '.png';
+            $qrCodePath = 'qrcodes/' . $this->device->deviceId . '.png';
             $this->qrCodeExists = Storage::disk('public')->exists($qrCodePath);
         }
     }
