@@ -3,13 +3,14 @@
 namespace App\Filament\Dashboard\Resources\Devices\Tables;
 
 use Carbon\Carbon;
-use Filament\Actions\Action;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Storage;
 
 class DevicesTable
@@ -201,6 +202,16 @@ class DevicesTable
             ])
             ->bulkActions([
                 BulkActionGroup::make([
+                    BulkAction::make('bulk_print_qr')
+                        ->label('Print')
+                        ->icon('heroicon-o-document-arrow-down')->icon('heroicon-o-document-arrow-down')
+                        ->action(function ($records) {
+                            $ids = $records->pluck('id')->toArray();
+                            session(['qr_ids' => $ids]);
+
+                            return redirect()->route('devices.qr-print');
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make()
                         ->label(__('devices.actions.delete'))
                         ->requiresConfirmation()

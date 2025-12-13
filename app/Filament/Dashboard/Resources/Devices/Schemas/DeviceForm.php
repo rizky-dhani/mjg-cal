@@ -127,7 +127,11 @@ class DeviceForm
                     ->label(__('devices.form.cert_number.label'))
                     ->disk('public')
                     ->directory('certificates')
-                    ->visibility('public')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->storeFileNamesIn('original_filename')
+                    ->getUploadedFileNameForStorageUsing(
+                        fn(TemporaryUploadedFile $file, $record): string => 'CERT-' . $record->device_number .  $file->getClientOriginalExtension()
+                    )
                     ->columnSpanFull(),
             ]);
     }

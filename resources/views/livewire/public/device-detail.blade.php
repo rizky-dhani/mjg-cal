@@ -93,7 +93,7 @@
 
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('devices.detail.cal_info') }}</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div class="flex flex-col">
                             <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.calibration_date.label') }}</h4>
                             <p class="mt-1 text-gray-900">{{ $device->calibration_date ? \Carbon\Carbon::parse($device->calibration_date)->format('d M Y') : 'N/A' }}</p>
@@ -103,11 +103,19 @@
                             <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.next_calibration_date.label') }}</h4>
                             <p class="mt-1 text-gray-900">{{ $device->next_calibration_date ? \Carbon\Carbon::parse($device->next_calibration_date)->format('d M Y') : 'N/A' }}</p>
                         </div>
+                    </div>
 
-                        <div class="flex flex-col">
-                            <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.cert_number.label') }}</h4>
-                            <p class="mt-1 text-gray-900">{{ $device->cert_number ?? 'N/A' }}</p>
-                        </div>
+                    <div class="flex flex-col">
+                        <h4 class="text-sm font-medium text-gray-500">{{ __('devices.form.cert_number.label') }}</h4>
+                        @if($device->cert_number)
+                            <a href="{{ route('certificate.download', ['cert_number' => $device->cert_number]) }}"
+                               class="mt-1 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150 w-fit">
+                               <i class="fas fa-download"></i>
+                                Download Certificate
+                            </a>
+                        @else
+                            <p class="mt-1 text-gray-900">Certificate not available</p>
+                        @endif
                     </div>
                 </div>
 
